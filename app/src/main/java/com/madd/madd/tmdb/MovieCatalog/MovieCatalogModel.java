@@ -1,9 +1,8 @@
-package com.madd.madd.tmdb.PopularMovieList;
+package com.madd.madd.tmdb.MovieCatalog;
 
-import com.madd.madd.tmdb.Models.MovieList;
+import com.madd.madd.tmdb.HTTP.TMDBApi;
+import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.Utilities.References;
-import com.madd.madd.tmdb.Utilities.Retrofit.API;
-import com.madd.madd.tmdb.Utilities.Retrofit.TMDBService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,11 +10,17 @@ import retrofit2.Response;
 
 public class MovieCatalogModel implements MovieCatalogContract.Model {
 
+    TMDBApi tmdbApi;
+
+    public MovieCatalogModel(TMDBApi tmdbApi) {
+        this.tmdbApi = tmdbApi;
+    }
+
     @Override
     public void getMovieList(int page, GetMovieList getMovieList) {
 
-        TMDBService service = API.getAPI().create(TMDBService.class);
-        Call<MovieList> movieList = service.getMoviePopularList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
+
+        Call<MovieList> movieList = tmdbApi.getMoviePopularList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
 
         movieList.enqueue(new Callback<MovieList>() {
             @Override
@@ -35,9 +40,7 @@ public class MovieCatalogModel implements MovieCatalogContract.Model {
     @Override
     public void getMovieUpcomingList(int page, GetMovieList getMovieList){
 
-        TMDBService service = API.getAPI().create(TMDBService.class);
-
-        Call<MovieList> movieList = service.getMovieUpcomingList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
+        Call<MovieList> movieList = tmdbApi.getMovieUpcomingList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
 
         movieList.enqueue(new Callback<MovieList>() {
             @Override
@@ -58,10 +61,7 @@ public class MovieCatalogModel implements MovieCatalogContract.Model {
     @Override
     public void getMovieTopRatedList(int page, GetMovieList getMovieList) {
 
-
-        TMDBService service = API.getAPI().create(TMDBService.class);
-
-        Call<MovieList> movieList = service.getMovieTopRatedList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
+        Call<MovieList> movieList = tmdbApi.getMovieTopRatedList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
 
         movieList.enqueue(new Callback<MovieList>() {
             @Override

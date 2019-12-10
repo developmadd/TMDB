@@ -1,4 +1,6 @@
-package com.madd.madd.tmdb.PopularMovieList;
+package com.madd.madd.tmdb.MovieCatalog;
+
+import com.madd.madd.tmdb.HTTP.TMDBApi;
 
 import dagger.Module;
 import dagger.Provides;
@@ -12,7 +14,7 @@ public class MovieCatalogModule {
     }
 
     @Provides
-    public MovieCatalogContract.Model providePopularMovieListModel(){
-        return new MovieCatalogModel();
+    public MovieCatalogContract.Model providePopularMovieListModel(TMDBApi tmdbApi){
+        return new MovieCatalogModel(tmdbApi);
     }
 }

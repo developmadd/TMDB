@@ -6,10 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.madd.madd.tmdb.Models.Cast;
+import com.madd.madd.tmdb.HTTP.Models.Cast;
 import com.madd.madd.tmdb.Services.MovieService;
-import com.madd.madd.tmdb.Services.TVShowService;
-import com.madd.madd.tmdb.Utilities.References;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,9 @@
-package com.madd.madd.tmdb.Root;
+package com.madd.madd.tmdb.DI;
 
 import android.app.Application;
 
-import com.madd.madd.tmdb.PopularMovieList.MovieCatalogModule;
+import com.madd.madd.tmdb.HTTP.TMDBModule;
+import com.madd.madd.tmdb.MovieCatalog.MovieCatalogModule;
 
 public class App extends Application {
 
@@ -14,6 +15,7 @@ public class App extends Application {
         component = DaggerApplicationComponent.builder()
                     .applicationModule(new ApplicationModule(this))
                     .movieCatalogModule(new MovieCatalogModule())
+                    .tMDBModule(new TMDBModule())
                     .build();
     }
 

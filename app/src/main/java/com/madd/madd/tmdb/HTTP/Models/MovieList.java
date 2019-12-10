@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.Models;
+package com.madd.madd.tmdb.HTTP.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -12,13 +12,24 @@ public class MovieList {
     @Expose
     int page;
 
-    @SerializedName("total_pages")
-    @Expose
-    int totalPages;
-
     @SerializedName("results")
     @Expose
     List<Movie> movieList;
+
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public List<Movie> getMovieList() {
+        return movieList;
+    }
+
+
 
 
     public static class Movie {
@@ -60,32 +71,7 @@ public class MovieList {
             this.posterPath = posterPath;
         }
 
-        public int getContentType() {
-            return title == null ? References.TV_TYPE : References.MOVIE_TYPE ;
-        }
-
-
     }
 
-
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
-
-    public List<Movie> getMovieList() {
-        return movieList;
-    }
 
 }

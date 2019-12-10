@@ -1,10 +1,10 @@
-package com.madd.madd.tmdb.Models.Lists.Content;
+package com.madd.madd.tmdb.Models;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
-import com.madd.madd.tmdb.Models.MovieList;
-import com.madd.madd.tmdb.PopularMovieList.MovieAdapter;
+import com.madd.madd.tmdb.HTTP.Models.MovieList;
+import com.madd.madd.tmdb.MovieCatalog.MovieAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

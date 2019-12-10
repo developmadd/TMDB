@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.madd.madd.tmdb.Models.Cast;
+import com.madd.madd.tmdb.HTTP.Models.Cast;
 import com.madd.madd.tmdb.R;
 
 import java.util.List;

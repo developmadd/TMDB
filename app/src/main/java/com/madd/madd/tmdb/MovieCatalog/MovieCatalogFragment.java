@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.PopularMovieList;
+package com.madd.madd.tmdb.MovieCatalog;
 
 
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.madd.madd.tmdb.Models.MovieList;
+import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.R;
-import com.madd.madd.tmdb.Root.App;
+import com.madd.madd.tmdb.DI.App;
 import com.madd.madd.tmdb.Utilities.Utilities;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.Root;
+package com.madd.madd.tmdb.DI;
 
 import android.app.Application;
 import android.content.Context;

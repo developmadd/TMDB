@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.madd.madd.tmdb.Models.Lists.Actor.ActorList_;
-import com.madd.madd.tmdb.Models.Movie;
+import com.madd.madd.tmdb.HTTP.Models.Movie;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Services.MovieService;
 import com.madd.madd.tmdb.Utilities.InformativeDialog;

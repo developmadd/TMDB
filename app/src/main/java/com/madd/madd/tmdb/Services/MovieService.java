@@ -1,11 +1,9 @@
 package com.madd.madd.tmdb.Services;
 
-import com.madd.madd.tmdb.Models.Cast;
-import com.madd.madd.tmdb.Models.MovieList;
-import com.madd.madd.tmdb.Models.Movie;
+import com.madd.madd.tmdb.HTTP.Models.Cast;
+import com.madd.madd.tmdb.HTTP.Models.Movie;
 import com.madd.madd.tmdb.Utilities.References;
-import com.madd.madd.tmdb.Utilities.Retrofit.API;
-import com.madd.madd.tmdb.Utilities.Retrofit.TMDBService;
+import com.madd.madd.tmdb.HTTP.TMDBApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +30,7 @@ public class MovieService {
                                 GetMovie getMovie) {
 
 
-        TMDBService service = API.getAPI().create(TMDBService.class);
+        /*TMDBApi service = API.getAPI().create(TMDBApi.class);
 
         Call<Movie> movieCall = service.getMovie(movieId,References.TMDB_API_KEY, References.TMDB_LANGUAGE);
         movieCall.enqueue(new Callback<Movie>() {
@@ -46,7 +44,7 @@ public class MovieService {
             public void onFailure(Call<Movie> call, Throwable t) {
                 getMovie.onError(t.getLocalizedMessage());
             }
-        });
+        });*/
 
     }
 
@@ -58,7 +56,7 @@ public class MovieService {
     public static void getMovieCast(String movieId,
                                     GetCast getCast ){
 
-        TMDBService service = API.getAPI().create(TMDBService.class);
+        /*TMDBApi service = API.getAPI().create(TMDBApi.class);
 
         Call<Cast> movieCall = service.getMovieCast(movieId,References.TMDB_API_KEY);
         movieCall.enqueue(new Callback<Cast>() {
@@ -72,7 +70,7 @@ public class MovieService {
             public void onFailure(Call<Cast> call, Throwable t) {
                 getCast.onError(t.getLocalizedMessage());
             }
-        });
+        });*/
 
     }
 
@@ -84,7 +82,7 @@ public class MovieService {
     /*public static void getMovieListByQuery(String query, int page,
                                            GetContentList getMovieList){
 
-        TMDBService service = API.getAPI().create(TMDBService.class);
+        TMDBApi service = API.getAPI().create(TMDBApi.class);
 
         Call<MovieList> movieList = service.getMovieListByQuery(References.TMDB_API_KEY,References.TMDB_LANGUAGE,query,page);
 

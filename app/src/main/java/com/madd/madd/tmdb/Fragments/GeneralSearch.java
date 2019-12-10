@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.madd.madd.tmdb.Models.Lists.Content.Movie_TVShowList;
-import com.madd.madd.tmdb.PopularMovieList.MovieCatalogContract;
+import com.madd.madd.tmdb.Models.Movie_TVShowList;
+import com.madd.madd.tmdb.MovieCatalog.MovieCatalogContract;
 import com.madd.madd.tmdb.R;
 
 

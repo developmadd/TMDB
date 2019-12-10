@@ -1,6 +1,6 @@
-package com.madd.madd.tmdb.PopularMovieList;
+package com.madd.madd.tmdb.MovieCatalog;
 
-import com.madd.madd.tmdb.Models.MovieList;
+import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.Utilities.Utilities;
 
 import java.util.ArrayList;

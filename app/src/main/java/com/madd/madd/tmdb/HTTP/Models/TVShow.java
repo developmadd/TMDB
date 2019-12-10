@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.Models;
+package com.madd.madd.tmdb.HTTP.Models;
 
 import android.content.Context;
 

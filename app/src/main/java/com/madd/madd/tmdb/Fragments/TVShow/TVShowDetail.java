@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.madd.madd.tmdb.Models.Lists.Actor.ActorList_;
-import com.madd.madd.tmdb.Models.TVShow;
+import com.madd.madd.tmdb.HTTP.Models.TVShow;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.InformativeDialog;
 import com.madd.madd.tmdb.Utilities.References;

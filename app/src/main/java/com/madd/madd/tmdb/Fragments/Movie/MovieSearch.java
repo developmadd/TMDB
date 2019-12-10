@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.madd.madd.tmdb.PopularMovieList.MovieCatalogContract;
-import com.madd.madd.tmdb.PopularMovieList.MovieCatalogFragment;
+import com.madd.madd.tmdb.MovieCatalog.MovieCatalogContract;
+import com.madd.madd.tmdb.MovieCatalog.MovieCatalogFragment;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
 import com.madd.madd.tmdb.Utilities.Utilities;

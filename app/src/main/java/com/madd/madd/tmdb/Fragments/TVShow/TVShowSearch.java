@@ -10,8 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.madd.madd.tmdb.PopularMovieList.MovieCatalogContract;
+import com.madd.madd.tmdb.MovieCatalog.MovieCatalogContract;
 import com.madd.madd.tmdb.R;
+import com.madd.madd.tmdb.TVShowCatalog.TVShowCatalogFragment;
 import com.madd.madd.tmdb.Utilities.References;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
 import com.madd.madd.tmdb.Utilities.Utilities;
@@ -26,9 +27,9 @@ public class TVShowSearch extends Fragment {
 
     private View view;
 
-    private TVShowCatalog tvShowPopularList;
-    private TVShowCatalog tvShowOnAirList;
-    private TVShowCatalog tvShowTopRatedList;
+    private TVShowCatalogFragment tvShowPopularList;
+    private TVShowCatalogFragment tvShowOnAirList;
+    private TVShowCatalogFragment tvShowTopRatedList;
 
     private MovieCatalogContract.View.MovieSelected onTVShowSelected;
     public void setOnTVShowSelected(MovieCatalogContract.View.MovieSelected onTVShowSelected) {
@@ -61,15 +62,15 @@ public class TVShowSearch extends Fragment {
 
     private void createTVShowLists(){
 
-        tvShowPopularList = new TVShowCatalog();
+        tvShowPopularList = new TVShowCatalogFragment();
         tvShowPopularList.setListType(References.POPULAR_TYPE);
         tvShowPopularList.setOnTVShowSelected(onTVShowSelected);
 
-        tvShowOnAirList = new TVShowCatalog();
+        tvShowOnAirList = new TVShowCatalogFragment();
         tvShowOnAirList.setListType(References.ON_AIR_TYPE);
         tvShowOnAirList.setOnTVShowSelected(onTVShowSelected);
 
-        tvShowTopRatedList = new TVShowCatalog();
+        tvShowTopRatedList = new TVShowCatalogFragment();
         tvShowTopRatedList.setListType(References.TOP_RATED_TYPE);
         tvShowTopRatedList.setOnTVShowSelected(onTVShowSelected);
 

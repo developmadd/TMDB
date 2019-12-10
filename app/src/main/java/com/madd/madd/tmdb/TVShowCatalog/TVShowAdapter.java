@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.PopularMovieList;
+package com.madd.madd.tmdb.TVShowCatalog;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.madd.madd.tmdb.Models.MovieList;
+import com.madd.madd.tmdb.HTTP.Models.MovieList;
+import com.madd.madd.tmdb.HTTP.Models.TVShow;
+import com.madd.madd.tmdb.HTTP.Models.TVShowList;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.References;
 
@@ -19,16 +21,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>{
+public class TVShowAdapter extends  RecyclerView.Adapter<TVShowAdapter.ViewHolder>{
 
 
-    private List<MovieList.Movie> movieList;
-    private MovieEvents movieEvents;
+    private List<TVShowList.TVShow> tvShowList;
+    private TVShowEvents tvShowEvents;
 
-    MovieAdapter(List<MovieList.Movie> movieList,
-                 MovieEvents movieEvents) {
-        this.movieList = movieList;
-        this.movieEvents = movieEvents;
+    TVShowAdapter(List<TVShowList.TVShow> tvShowList,
+                  TVShowEvents tvShowEvents) {
+        this.tvShowList = tvShowList;
+        this.tvShowEvents = tvShowEvents;
     }
 
     @NonNull
@@ -42,12 +44,12 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.bind(movieList.get(position));
+        viewHolder.bind(tvShowList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return movieList.size();
+        return tvShowList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -61,10 +63,10 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(MovieList.Movie movie){
-            if ( !movie.getPosterPath().isEmpty() ) {
+        void bind(TVShowList.TVShow tvShow){
+            if ( !tvShow.getPosterPath().isEmpty() ) {
                 Glide.with(imageViewPoster)
-                        .load(movie.getPosterPath())
+                        .load(tvShow.getPosterPath())
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imageViewPoster);
             } else {
@@ -74,22 +76,22 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
                         .into(imageViewPoster);
             }
 
-            textViewTitle.setText(movie.getTitle());
+            textViewTitle.setText(tvShow.getName());
 
             itemView.setOnClickListener(view ->
-                    movieEvents.onMovieClick(movie)
+                    tvShowEvents.onTVShowClick(tvShow)
             );
 
             int itemMinLimit = References.MOVIE_PAGINATE_STEP;
-            if ( movieList.size() >= itemMinLimit
-                    && getAdapterPosition() == movieList.size() - 5 ) {
-                movieEvents.onRequestNextPage();
+            if ( tvShowList.size() >= itemMinLimit
+                    && getAdapterPosition() == tvShowList.size() - 5 ) {
+                tvShowEvents.onRequestNextPage();
             }
         }
     }
 
-    public interface MovieEvents {
-        void onMovieClick(MovieList.Movie selectedMovie);
+    public interface TVShowEvents {
+        void onTVShowClick(TVShowList.TVShow selectedTVShow);
         void onRequestNextPage();
 
     }
