@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
+import com.madd.madd.tmdb.Models.Cast;
 import com.madd.madd.tmdb.Services.MovieService;
 import com.madd.madd.tmdb.Services.TVShowService;
 import com.madd.madd.tmdb.Utilities.References;
@@ -12,15 +14,15 @@ import com.madd.madd.tmdb.Utilities.References;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActorList {
+public class ActorList_ {
 
     private Context context;
     private RecyclerView recyclerView;
 
-    private List<ActorCard> actorCardList = new ArrayList<>();
+    private List<Cast.Actor> actorCardList = new ArrayList<>();
     private ActorAdapter actorAdapter;
 
-    public ActorList(Context context, RecyclerView recyclerView) {
+    public ActorList_(Context context, RecyclerView recyclerView) {
         this.context = context;
         this.recyclerView = recyclerView;
         initList();
@@ -45,13 +47,18 @@ public class ActorList {
 
 
     // Criterios de llenado de lista
-
     public void getMovieCast(String movieId){
 
-        MovieService.getMovieCast(context, movieId, (message, actorCardList) -> {
-            if ( message.equals(References.OK_MESSAGE) ) {
-                this.actorCardList.addAll(actorCardList);
+        MovieService.getMovieCast(movieId, new MovieService.GetCast() {
+            @Override
+            public void onSuccess(Cast cast) {
+                actorCardList.addAll(cast.getActorList());
                 actorAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onError(String error) {
+                Log.e("cast",error);
             }
         });
 
@@ -59,12 +66,12 @@ public class ActorList {
 
     public void getTVShowCast(String tvShowId){
 
-        TVShowService.getTVShowCast(context, tvShowId, (message, actorCardList) -> {
+        /*TVShowService.getTVShowCast(context, tvShowId, (message, actorCardList) -> {
             if ( message.equals(References.OK_MESSAGE) ) {
                 this.actorCardList.addAll(actorCardList);
                 actorAdapter.notifyDataSetChanged();
             }
-        });
+        });*/
 
     }
 
@@ -72,10 +79,6 @@ public class ActorList {
 
 
 
-
-    public interface GetActorList{
-        void actorList(String message, List<ActorCard> actorCardList);
-    }
 
 
 }

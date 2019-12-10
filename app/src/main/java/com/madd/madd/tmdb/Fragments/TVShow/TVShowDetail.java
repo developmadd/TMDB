@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.madd.madd.tmdb.Models.Lists.Actor.ActorList;
+import com.madd.madd.tmdb.Models.Lists.Actor.ActorList_;
 import com.madd.madd.tmdb.Models.TVShow;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.InformativeDialog;
@@ -92,7 +92,7 @@ public class TVShowDetail extends Fragment {
         });
 
 
-        ActorList actorList = new ActorList(getContext(), recyclerViewCast);
+        ActorList_ actorList = new ActorList_(getContext(), recyclerViewCast);
         actorList.getTVShowCast(tvShowId);
     }
 

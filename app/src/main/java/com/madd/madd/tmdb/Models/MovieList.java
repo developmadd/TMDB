@@ -6,7 +6,7 @@ import com.madd.madd.tmdb.Utilities.References;
 
 import java.util.List;
 
-public class ContentList_ {
+public class MovieList {
 
     @SerializedName("page")
     @Expose
@@ -18,10 +18,10 @@ public class ContentList_ {
 
     @SerializedName("results")
     @Expose
-    List<Content> contentList;
+    List<Movie> movieList;
 
 
-    public static class Content {
+    public static class Movie {
 
         @SerializedName("id")
         @Expose
@@ -31,9 +31,6 @@ public class ContentList_ {
         @Expose
         private String title;
 
-        @SerializedName("name")
-        @Expose
-        private String name;
 
         @SerializedName("poster_path")
         @Expose
@@ -48,7 +45,7 @@ public class ContentList_ {
         }
 
         public String getTitle() {
-            return title;
+            return title ;
         }
 
         public void setTitle(String title) {
@@ -87,8 +84,8 @@ public class ContentList_ {
         this.totalPages = totalPages;
     }
 
-    public List<Content> getContentList() {
-        return contentList;
+    public List<Movie> getMovieList() {
+        return movieList;
     }
 
 }

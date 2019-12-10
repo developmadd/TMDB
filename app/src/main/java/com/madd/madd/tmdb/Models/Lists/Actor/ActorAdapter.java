@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.madd.madd.tmdb.Models.Cast;
 import com.madd.madd.tmdb.R;
 
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
 public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> {
 
     private Context context;
-    private List<ActorCard> actorCardList;
+    private List<Cast.Actor> actorCardList;
 
-    ActorAdapter(List<ActorCard> actorCardList) {
+    ActorAdapter(List<Cast.Actor> actorCardList) {
         this.actorCardList = actorCardList;
     }
 
@@ -55,7 +56,7 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
             textViewCharacter = itemView.findViewById(R.id.TV_Section_Actor_Character);
         }
 
-        void bind( ActorCard actorCard ){
+        void bind( Cast.Actor actorCard ){
             if (!actorCard.getProfilePath().isEmpty() ) {
                 Glide.with(imageView)
                         .load(actorCard.getProfilePath())

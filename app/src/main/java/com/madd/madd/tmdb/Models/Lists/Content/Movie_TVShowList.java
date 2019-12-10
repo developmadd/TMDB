@@ -1,51 +1,46 @@
 package com.madd.madd.tmdb.Models.Lists.Content;
 
 import android.content.Context;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.madd.madd.tmdb.Models.ContentList_;
-import com.madd.madd.tmdb.Services.MovieService;
-import com.madd.madd.tmdb.Services.TVShowService;
-import com.madd.madd.tmdb.Utilities.References;
-import com.madd.madd.tmdb.Utilities.Utilities;
+import com.madd.madd.tmdb.Models.MovieList;
+import com.madd.madd.tmdb.PopularMovieList.MovieAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentList {
+public class Movie_TVShowList {
 
 
     private Context context;
     private RecyclerView recyclerView;
 
-    private ContentAdapter.ContentListener contentListener;
+    //private MovieAdapter.ContentListener contentListener;
 
-    private List<ContentList_.Content> contentList_ = new ArrayList<>();
+    private List<MovieList.Movie> movieList_ = new ArrayList<>();
     int page = 1;
-    private List<ContentList_.Content> filteredContentList = new ArrayList<>();
+    private List<MovieList.Movie> filteredMovieList = new ArrayList<>();
 
 
-    private ContentAdapter contentAdapter;
+    private MovieAdapter movieAdapter;
     private boolean singleContentType;          // false para series Y peliculas, true para series O peliculas
 
 
-    public ContentList(Context context, RecyclerView recyclerView,
-                       boolean singleContentType,
-                       ContentAdapter.ContentListener contentListener) {
+    public Movie_TVShowList(Context context, RecyclerView recyclerView,
+                            boolean singleContentType
+                            /*MovieAdapter.ContentListener contentListener*/) {
         this.context = context;
         this.recyclerView = recyclerView;
         this.singleContentType = singleContentType;
-        this.contentListener = contentListener;
-        initList();
+        //this.contentListener = contentListener;
+        //initList();
     }
 
-
+/*
     private void initList(){
         GridLayoutManager layoutManager = new GridLayoutManager(context,3);
-        contentAdapter = new ContentAdapter(
-                filteredContentList,
+        movieAdapter = new MovieAdapter(
+                filteredMovieList,
                 singleContentType,
                 contentListener);
 
@@ -53,7 +48,7 @@ public class ContentList {
         recyclerView.setItemViewCacheSize(20);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(contentAdapter);
+        recyclerView.setAdapter(movieAdapter);
     }
 
 
@@ -80,10 +75,10 @@ public class ContentList {
 
         MovieService.getMoviePopularList(page, new MovieService.GetContentList() {
             @Override
-            public void onSuccess(ContentList_ movieList_) {
+            public void onSuccess(MovieList movieList_) {
                 page = movieList_.getPage();
-                filteredContentList.addAll(movieList_.getContentList());
-                contentAdapter.notifyDataSetChanged();
+                filteredMovieList.addAll(movieList_.getMovieList());
+                movieAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -113,12 +108,12 @@ public class ContentList {
     // Filtro Online
 
 
-    /*private List<com.madd.madd.tmdb.Models.ContentList.Content> movieList = new ArrayList<>();
-    private List<com.madd.madd.tmdb.Models.ContentList.Content> tvShowList = new ArrayList<>();
+    /*private List<com.madd.madd.tmdb.Models.Movie_TVShowList.Movie> movieList = new ArrayList<>();
+    private List<com.madd.madd.tmdb.Models.Movie_TVShowList.Movie> tvShowList = new ArrayList<>();
 
     public void initSearchByQuery(){
-        this.filteredContentList.clear();
-        this.contentAdapter.notifyDataSetChanged();
+        this.filteredMovieList.clear();
+        this.movieAdapter.notifyDataSetChanged();
         this.page = 1;
     }
 
@@ -132,7 +127,7 @@ public class ContentList {
                 if (serverMessage.equals(References.OK_MESSAGE)) {
                     movieList = contentList;
                     showContentListByQuery(++counter[0] == 2);
-                } else{
+                } else {
                     setErrorMessage(serverMessage);
                 }
 
@@ -161,13 +156,13 @@ public class ContentList {
     private void showContentListByQuery( boolean listsReady ){
         if ( listsReady ) {                                                // Ambas listas han sido cargadas
             if (!movieList.isEmpty() || !tvShowList.isEmpty()) {            // Al menos una lista trajo nuevos elementos
-                filteredContentList.addAll(movieList);
-                filteredContentList.addAll(tvShowList);
+                filteredMovieList.addAll(movieList);
+                filteredMovieList.addAll(tvShowList);
 
-                contentAdapter.notifyDataSetChanged();
+                movieAdapter.notifyDataSetChanged();
                 page++;
             }
-            contentListener.onSendMessage(filteredContentList.isEmpty(),
+            contentListener.onSendMessage(filteredMovieList.isEmpty(),
                     "Sin resultados");
         }
     }
@@ -190,37 +185,37 @@ public class ContentList {
 
     public void getCoincidenceMovie(String coincidenceText, boolean paginate){
 
-        filteredContentList.clear();
+        filteredMovieList.clear();
 
         if (!coincidenceText.isEmpty()) {
             String compare = Utilities.cleanString(coincidenceText);
-            for (com.madd.madd.tmdb.Models.ContentList.Content content : contentList) {
+            for (com.madd.madd.tmdb.Models.Movie_TVShowList.Movie content : contentList) {
 
                 String original = Utilities.cleanString(content.getTitle());
                 if (original.startsWith(compare)) {
-                    filteredContentList.add(content);
+                    filteredMovieList.add(content);
                 }
             }
-            for (com.madd.madd.tmdb.Models.ContentList.Content content : contentList) {
+            for (com.madd.madd.tmdb.Models.Movie_TVShowList.Movie content : contentList) {
 
                 String original = Utilities.cleanString(content.getTitle());
                 if ( !original.startsWith(compare) && original.contains(compare)  ) {
-                    filteredContentList.add(content);
+                    filteredMovieList.add(content);
                 }
             }
-            contentAdapter.notifyDataSetChanged();
+            movieAdapter.notifyDataSetChanged();
         } else {
-            filteredContentList.addAll(contentList);
+            filteredMovieList.addAll(contentList);
             if ( paginate ) {
-                contentAdapter.notifyItemRangeInserted(
+                movieAdapter.notifyItemRangeInserted(
                         (page - 1) * References.MOVIE_PAGINATE_STEP,
                         References.MOVIE_PAGINATE_STEP);
             } else {
-                contentAdapter.notifyDataSetChanged();
+                movieAdapter.notifyDataSetChanged();
             }
         }
 
-        contentListener.onSendMessage(filteredContentList.isEmpty(),"Sin resultados");
+        contentListener.onSendMessage(filteredMovieList.isEmpty(),"Sin resultados");
 
     }*/
 
@@ -234,14 +229,14 @@ public class ContentList {
 
 
     private void setErrorMessage(String serverMessage){
-        if (serverMessage.equals(References.NOT_INTERNET_ERROR)) {
+        /*if (serverMessage.equals(References.NOT_INTERNET_ERROR)) {
             contentListener.onSendMessage(true,
                     "Parece que no tienes una conexión a internet, " +
                             "asegurate de conectarte a una red y vuelve a intentarlo");
         } else {
             contentListener.onSendMessage(true,
                     "Ha ocurrido un error, intente reiniciar la aplicación porfavor");
-        }
+        }*/
     }
 
 
@@ -251,13 +246,7 @@ public class ContentList {
 
 
 
-    public interface OnContentSelected {
-        void onContentClick(ContentList_.Content content);
-    }
 
-    public interface GetContentList {
-        void contentList(String message, List<ContentList_.Content> contentList);
-    }
 
 
 }

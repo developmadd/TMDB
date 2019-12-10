@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.madd.madd.tmdb.Models.Lists.Content.ContentList;
+import com.madd.madd.tmdb.PopularMovieList.MovieCatalogContract;
+import com.madd.madd.tmdb.PopularMovieList.MovieCatalogFragment;
 import com.madd.madd.tmdb.R;
-import com.madd.madd.tmdb.Utilities.References;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
 import com.madd.madd.tmdb.Utilities.Utilities;
 
@@ -27,12 +27,12 @@ public class MovieSearch extends Fragment {
 
     private View view;
 
-    private MovieCatalog moviePopularList;
-    private MovieCatalog movieUpcomingList;
-    private MovieCatalog movieTopRateList;
+    private MovieCatalogFragment moviePopularList;
+    private MovieCatalogFragment movieUpcomingList;
+    private MovieCatalogFragment movieTopRateList;
 
-    private ContentList.OnContentSelected onMovieSelected;
-    public void setOnMovieSelected(ContentList.OnContentSelected onMovieSelected) {
+    private MovieCatalogContract.View.MovieSelected onMovieSelected;
+    public void setOnMovieSelected(MovieCatalogContract.View.MovieSelected onMovieSelected) {
         this.onMovieSelected = onMovieSelected;
     }
 
@@ -62,16 +62,16 @@ public class MovieSearch extends Fragment {
 
     private void createMovieLists(){
 
-        moviePopularList = new MovieCatalog();
-        moviePopularList.setListType(References.POPULAR_TYPE);
+        moviePopularList = new MovieCatalogFragment();
+        moviePopularList.setListType(MovieCatalogFragment.POPULAR_TYPE);
         moviePopularList.setOnMovieSelected(onMovieSelected);
 
-        movieUpcomingList = new MovieCatalog();
-        movieUpcomingList.setListType(References.UPCOMING_TYPE);
+        movieUpcomingList = new MovieCatalogFragment();
+        movieUpcomingList.setListType(MovieCatalogFragment.UPCOMING_TYPE);
         movieUpcomingList.setOnMovieSelected(onMovieSelected);
 
-        movieTopRateList = new MovieCatalog();
-        movieTopRateList.setListType(References.TOP_RATED_TYPE);
+        movieTopRateList = new MovieCatalogFragment();
+        movieTopRateList.setListType(MovieCatalogFragment.TOP_RATED_TYPE);
         movieTopRateList.setOnMovieSelected(onMovieSelected);
 
 

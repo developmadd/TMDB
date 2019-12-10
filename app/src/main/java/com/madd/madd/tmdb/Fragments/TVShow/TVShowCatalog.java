@@ -2,9 +2,7 @@ package com.madd.madd.tmdb.Fragments.TVShow;
 
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -12,14 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.madd.madd.tmdb.Models.ContentList_;
-import com.madd.madd.tmdb.Models.Lists.Content.ContentAdapter;
-import com.madd.madd.tmdb.Models.Lists.Content.ContentList;
+import com.madd.madd.tmdb.Models.Lists.Content.Movie_TVShowList;
+import com.madd.madd.tmdb.PopularMovieList.MovieCatalogContract;
 import com.madd.madd.tmdb.R;
-import com.madd.madd.tmdb.Utilities.References;
-import com.madd.madd.tmdb.Utilities.Utilities;
-
-import java.util.Objects;
 
 
 /**
@@ -33,10 +26,10 @@ public class TVShowCatalog extends Fragment {
     private SearchView searchView;
     private TextView textViewEmpty;
 
-    private ContentList tvShowList;
+    private Movie_TVShowList tvShowList;
 
-    private ContentList.OnContentSelected onTVShowSelected;
-    public void setOnTVShowSelected(ContentList.OnContentSelected onTVShowSelected) {
+    private MovieCatalogContract.View.MovieSelected onTVShowSelected;
+    public void setOnTVShowSelected(MovieCatalogContract.View.MovieSelected onTVShowSelected) {
         this.onTVShowSelected = onTVShowSelected;
     }
 
@@ -62,10 +55,10 @@ public class TVShowCatalog extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_tvshow_catalog, container, false);
-        bindUI();
-        getTVShowList();
-        populateTVShowList();
-        setEvents();
+        //bindUI();
+        //getTVShowList();
+        //populateTVShowList();
+        //setEvents();
 
         return view;
 
@@ -73,12 +66,12 @@ public class TVShowCatalog extends Fragment {
 
 
 
-    private void getTVShowList(){
-        tvShowList = new ContentList(getContext(), recyclerView, true,
+    /*private void getTVShowList(){
+        tvShowList = new Movie_TVShowList(getContext(), recyclerView, true,
 
-                new ContentAdapter.ContentListener() {
+                new MovieAdapter.ContentListener() {
                     @Override
-                    public void onContentClick(ContentList_.Content selectedContent) {
+                    public void onContentClick(MovieList.Movie selectedContent) {
                         onTVShowSelected.onContentClick(selectedContent);
                         Utilities.hideKeyboardFrom(searchView);
                     }
@@ -91,10 +84,10 @@ public class TVShowCatalog extends Fragment {
 
                     @Override
                     public void onRequestNextPage() {
-                        /*
+
                             Solicitar siguiente pagina solo si no se esta
                             ejecutando una busqueda local
-                        */
+
                         if (searchView.getQuery().toString().isEmpty()) {
                             populateTVShowList();
                         }
@@ -194,7 +187,7 @@ public class TVShowCatalog extends Fragment {
 
 
 
-
+*/
 
 
 

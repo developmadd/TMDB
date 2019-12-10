@@ -12,12 +12,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.madd.madd.tmdb.Models.Lists.Actor.ActorList;
+import com.madd.madd.tmdb.Models.Lists.Actor.ActorList_;
 import com.madd.madd.tmdb.Models.Movie;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Services.MovieService;
 import com.madd.madd.tmdb.Utilities.InformativeDialog;
-import com.madd.madd.tmdb.Utilities.References;
 
 import java.util.Objects;
 
@@ -84,7 +83,7 @@ public class MovieDetail extends Fragment {
             }
         });
 
-        ActorList actorList = new ActorList(getContext(), recyclerViewCast);
+        ActorList_ actorList = new ActorList_(getContext(), recyclerViewCast);
         actorList.getMovieCast(movieId);
 
     }

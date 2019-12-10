@@ -1,23 +1,11 @@
 package com.madd.madd.tmdb.Services;
 
-import android.content.Context;
-
-import com.madd.madd.tmdb.Models.ContentList_;
-import com.madd.madd.tmdb.Models.Lists.Actor.ActorList;
-import com.madd.madd.tmdb.Models.Lists.Content.ContentList;
-import com.madd.madd.tmdb.Models.Lists.Actor.ActorCard;
+import com.madd.madd.tmdb.Models.Cast;
+import com.madd.madd.tmdb.Models.MovieList;
 import com.madd.madd.tmdb.Models.Movie;
 import com.madd.madd.tmdb.Utilities.References;
 import com.madd.madd.tmdb.Utilities.Retrofit.API;
 import com.madd.madd.tmdb.Utilities.Retrofit.TMDBService;
-import com.madd.madd.tmdb.Utilities.VolleyService;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,8 +20,8 @@ public class MovieService {
         void onSuccess(Movie movie);
         void onError(String error);
     }
-    public interface GetContentList{
-        void onSuccess(ContentList_ movieList);
+    public interface GetCast{
+        void onSuccess(Cast cast);
         void onError(String error);
     }
 
@@ -67,61 +55,54 @@ public class MovieService {
 
     // Lists
 
-    public static void getMovieCast(Context context, String movieId,
-                                    ActorList.GetActorList getActorList ){
+    public static void getMovieCast(String movieId,
+                                    GetCast getCast ){
 
-        String url = "https://api.themoviedb.org/3/movie/" + movieId +"/credits?api_key=" +
-                References.TMDB_API_KEY;
+        TMDBService service = API.getAPI().create(TMDBService.class);
 
-        VolleyService.getInstance(context).getData(url, true,
-                new VolleyService.GetVolleyResponse() {
-                    @Override
-                    public void notifySuccess(JSONObject response) {
-                        try {
-                            List<ActorCard> actorCardList = new ArrayList<>();
-                            JSONArray jsonArray = response.getJSONArray("cast");
-                            for (int i = 0; i < jsonArray.length() && i < References.CAST_LIMIT; i++ ){
-                                ActorCard actorCard = new ActorCard(jsonArray.getJSONObject(i));
-                                actorCardList.add(actorCard);
-                            }
-                            getActorList.actorList(References.OK_MESSAGE,actorCardList);
-                        } catch (JSONException error) {
-                            getActorList.actorList(error.getMessage(),null);
-                        }
-                    }
+        Call<Cast> movieCall = service.getMovieCast(movieId,References.TMDB_API_KEY);
+        movieCall.enqueue(new Callback<Cast>() {
+            @Override
+            public void onResponse(Call<Cast> call, Response<Cast> response) {
+                Cast cast = response.body();
+                getCast.onSuccess(cast);
+            }
 
-                    @Override
-                    public void notifyError(String error) {
-                        getActorList.actorList(error,null);
-                    }
-                });
+            @Override
+            public void onFailure(Call<Cast> call, Throwable t) {
+                getCast.onError(t.getLocalizedMessage());
+            }
+        });
 
     }
 
 
-    public static void getMoviePopularList(int page,
+
+
+
+
+    /*public static void getMovieListByQuery(String query, int page,
                                            GetContentList getMovieList){
 
         TMDBService service = API.getAPI().create(TMDBService.class);
 
-        Call<ContentList_> movieList = service.getMoviePopularList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
+        Call<MovieList> movieList = service.getMovieListByQuery(References.TMDB_API_KEY,References.TMDB_LANGUAGE,query,page);
 
-        movieList.enqueue(new Callback<ContentList_>() {
+        movieList.enqueue(new Callback<MovieList>() {
             @Override
-            public void onResponse(Call<ContentList_> call, Response<ContentList_> response) {
+            public void onResponse(Call<MovieList> call, Response<MovieList> response) {
                 getMovieList.onSuccess(response.body());
             }
 
             @Override
-            public void onFailure(Call<ContentList_> call, Throwable t) {
+            public void onFailure(Call<MovieList> call, Throwable t) {
                 getMovieList.onError(t.getLocalizedMessage());
             }
 
 
         });
 
-    }
-
+    }*/
 
 
 

@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.madd.madd.tmdb.Models.Lists.Content.ContentList;
+import com.madd.madd.tmdb.PopularMovieList.MovieCatalogContract;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.References;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
@@ -30,8 +30,8 @@ public class TVShowSearch extends Fragment {
     private TVShowCatalog tvShowOnAirList;
     private TVShowCatalog tvShowTopRatedList;
 
-    private ContentList.OnContentSelected onTVShowSelected;
-    public void setOnTVShowSelected(ContentList.OnContentSelected onTVShowSelected) {
+    private MovieCatalogContract.View.MovieSelected onTVShowSelected;
+    public void setOnTVShowSelected(MovieCatalogContract.View.MovieSelected onTVShowSelected) {
         this.onTVShowSelected = onTVShowSelected;
     }
 

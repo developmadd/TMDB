@@ -15,8 +15,9 @@ import com.madd.madd.tmdb.Fragments.Movie.MovieDetail;
 import com.madd.madd.tmdb.Fragments.Movie.MovieSearch;
 import com.madd.madd.tmdb.Fragments.TVShow.TVShowDetail;
 import com.madd.madd.tmdb.Fragments.TVShow.TVShowSearch;
-import com.madd.madd.tmdb.Models.ContentList_;
+import com.madd.madd.tmdb.Models.MovieList;
 import com.madd.madd.tmdb.R;
+import com.madd.madd.tmdb.Root.App;
 import com.madd.madd.tmdb.Utilities.References;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
 import com.madd.madd.tmdb.Utilities.Utilities;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ((App)getApplication()).getComponent().inject(this);
         bindUI();
         setEvents();
     }
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void showTVShowDetail(ContentList_.Content tvShow){
+    private void showTVShowDetail(MovieList.Movie tvShow){
         TVShowDetail tvShowDetail = new TVShowDetail();
         tvShowDetail.setTVShowId(tvShow.getId());
         tvShowDetail.setOnTvShowDetailClose(this::hideDetail);
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         showDetail();
 
     }
-    private void showMovieDetail(ContentList_.Content movie){
+    private void showMovieDetail(MovieList.Movie movie){
         MovieDetail movieDetail = new MovieDetail();
         movieDetail.setMovieId(movie.getId());
         movieDetail.setOnMovieDetailClose(this::hideDetail);

@@ -2,10 +2,7 @@ package com.madd.madd.tmdb.Fragments;
 
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -13,13 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.madd.madd.tmdb.Models.ContentList_;
-import com.madd.madd.tmdb.Models.Lists.Content.ContentAdapter;
-import com.madd.madd.tmdb.Models.Lists.Content.ContentList;
+import com.madd.madd.tmdb.Models.Lists.Content.Movie_TVShowList;
+import com.madd.madd.tmdb.PopularMovieList.MovieCatalogContract;
 import com.madd.madd.tmdb.R;
-import com.madd.madd.tmdb.Utilities.Utilities;
-
-import java.util.Objects;
 
 
 /**
@@ -33,10 +26,10 @@ public class GeneralSearch extends Fragment {
     private SearchView searchView;
     private TextView textViewEmpty;
 
-    private ContentList contentList;
+    private Movie_TVShowList movieTVShowList;
 
-    private ContentList.OnContentSelected onContentSelected;
-    public void setOnContentSelected(ContentList.OnContentSelected onContentSelected) {
+    private MovieCatalogContract.View.MovieSelected onContentSelected;
+    public void setOnContentSelected(MovieCatalogContract.View.MovieSelected onContentSelected) {
         this.onContentSelected = onContentSelected;
     }
 
@@ -58,22 +51,22 @@ public class GeneralSearch extends Fragment {
 
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_general_search, container, false);
-        bindUI();
-        getMovieList();
-        setEvents();
+        //bindUI();
+        //getMovieList();
+       // setEvents();
 
         return view;
 
     }
 
 
-
+/*
     private void getMovieList(){
-        contentList = new ContentList(getContext(), recyclerView, false,
+        movieTVShowList = new Movie_TVShowList(getContext(), recyclerView, false,
 
-                new ContentAdapter.ContentListener() {
+                new MovieAdapter.ContentListener() {
                     @Override
-                    public void onContentClick(ContentList_.Content selectedMovieCard) {
+                    public void onContentClick(MovieList.Movie selectedMovieCard) {
                         onContentSelected.onContentClick(selectedMovieCard);
                         Utilities.hideKeyboardFrom(searchView);
                     }
@@ -98,7 +91,7 @@ public class GeneralSearch extends Fragment {
 
 
     public void populateMovieList(String query){
-        //contentList.getContentListByQuery(query);
+        //movieTVShowList.getContentListByQuery(query);
     }
 
 
@@ -123,7 +116,7 @@ public class GeneralSearch extends Fragment {
                     public void onTick(long millisUntilFinished) {}
                     public void onFinish() {
 
-                        //contentList.initSearchByQuery();
+                        //movieTVShowList.initSearchByQuery();
                         populateMovieList(s);
 
                     }
@@ -193,7 +186,7 @@ public class GeneralSearch extends Fragment {
 
 
 
-
+*/
 
 
 

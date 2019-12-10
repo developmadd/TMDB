@@ -1,6 +1,7 @@
 package com.madd.madd.tmdb.Utilities;
 
 public class References {
+
     public static String TMDB_API_KEY = "5312d9a66aaa268a0e2aab662d455498";
     public static String TMDB_LANGUAGE = "es-MX";
     public static String OK_MESSAGE = "OK";
@@ -20,6 +21,5 @@ public class References {
     public static int ON_AIR_TYPE = 3;
     public static int MOVIE_TYPE = 4;
     public static int TV_TYPE = 5;
-
 
 }

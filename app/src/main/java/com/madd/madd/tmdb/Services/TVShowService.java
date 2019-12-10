@@ -3,9 +3,7 @@ package com.madd.madd.tmdb.Services;
 import android.content.Context;
 
 
-import com.madd.madd.tmdb.Models.Lists.Actor.ActorList;
-import com.madd.madd.tmdb.Models.Lists.Content.ContentList;
-import com.madd.madd.tmdb.Models.Lists.Actor.ActorCard;
+import com.madd.madd.tmdb.Models.Lists.Actor.ActorList_;
 import com.madd.madd.tmdb.Utilities.References;
 import com.madd.madd.tmdb.Utilities.Utilities;
 import com.madd.madd.tmdb.Utilities.VolleyService;
@@ -52,8 +50,8 @@ public class TVShowService {
 
     // Lists
 
-    public static void getTVShowCast(Context context, String tvShowId,
-                                     ActorList.GetActorList getActorList){
+    /*public static void getTVShowCast(Context context, String tvShowId,
+                                     ActorList_.GetActorList getActorList){
 
         String url = "https://api.themoviedb.org/3/tv/" + tvShowId +"/credits?api_key=" +
                 References.TMDB_API_KEY;
@@ -82,44 +80,44 @@ public class TVShowService {
                 });
     }
 
-    /*public static void getTVShowPopularList(Context context, int page,
-                                            ContentList.GetContentList getContentList){
+    public static void getTVShowPopularList(Context context, int page,
+                                            Movie_TVShowList.GetContentList getMovieList){
 
         String url = "https://api.themoviedb.org/3/tv/popular?api_key=" +
                 References.TMDB_API_KEY + "&page=" + page + "&language=es-MX";
-        requestTVShowList(context,url,true, getContentList);
+        requestTVShowList(context,url,true, getMovieList);
 
     }
 
     public static void getTVShowOnAirList(Context context, int page,
-                                          ContentList.GetContentList getContentList){
+                                          Movie_TVShowList.GetContentList getMovieList){
 
         String url = "https://api.themoviedb.org/3/tv/on_the_air?api_key=" +
                 References.TMDB_API_KEY + "&page=" + page + "&language=es-MX";
-        requestTVShowList(context,url,true, getContentList);
+        requestTVShowList(context,url,true, getMovieList);
 
     }
 
     public static void getTVShowTopRatedList(Context context, int page,
-                                             ContentList.GetContentList getContentList){
+                                             Movie_TVShowList.GetContentList getMovieList){
 
         String url = "https://api.themoviedb.org/3/tv/top_rated?api_key=" +
                 References.TMDB_API_KEY + "&page=" + page + "&language=es-MX";
-        requestTVShowList(context,url,true, getContentList);
+        requestTVShowList(context,url,true, getMovieList);
 
     }
 
-    public static void getTVShowListByQuery(Context context, String query, int page, ContentList.GetContentList getContentList){
+    public static void getTVShowListByQuery(Context context, String query, int page, Movie_TVShowList.GetContentList getMovieList){
 
         String url = "https://api.themoviedb.org/3/search/tv?api_key=" +
                 References.TMDB_API_KEY + "&language=es-MX&query=" + query +"&page=" + page;
-        requestTVShowList(context,url,false, getContentList);
+        requestTVShowList(context,url,false, getMovieList);
 
     }
 
 
     private static void requestTVShowList(Context context, String url, boolean useCache,
-                                          ContentList.GetContentList getContentList){
+                                          Movie_TVShowList.GetContentList getMovieList){
 
         VolleyService.getInstance(context).getData(url,useCache,
                 new VolleyService.GetVolleyResponse() {
@@ -127,23 +125,23 @@ public class TVShowService {
                     public void notifySuccess(JSONObject response) {
                         try {
 
-                            List<com.madd.madd.tmdb.Models.ContentList.Content> contentList = new ArrayList<>();
+                            List<com.madd.madd.tmdb.Models.Movie_TVShowList.Movie> contentList = new ArrayList<>();
                             JSONArray jsonArray = response.getJSONArray("results");
                             for (int index = 0; index < jsonArray.length(); index++){
                                 JSONObject tvShowJSON = jsonArray.getJSONObject(index);
-                                //Content contentCard = new Content(tvShowJSON,References.TV_TYPE);
+                                //Movie contentCard = new Movie(tvShowJSON,References.TV_TYPE);
                                 //contentList.add(contentCard);
                             }
-                            getContentList.contentList(References.OK_MESSAGE, contentList);
+                            getMovieList.contentList(References.OK_MESSAGE, contentList);
 
                         } catch (JSONException error) {
-                            getContentList.contentList(error.getMessage(),null);
+                            getMovieList.contentList(error.getMessage(),null);
                         }
                     }
 
                     @Override
                     public void notifyError(String error) {
-                        getContentList.contentList(error,null);
+                        getMovieList.contentList(error,null);
                     }
                 });
     }*/
