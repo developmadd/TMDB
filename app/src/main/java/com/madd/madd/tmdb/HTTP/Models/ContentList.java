@@ -16,6 +16,15 @@ public class ContentList {
     List<Content> contentList;
 
 
+    public ContentList(int page, List<Content> contentList) {
+        this.page = page;
+        this.contentList = contentList;
+    }
+
+    public ContentList() {
+
+    }
+
     public int getPage() {
         return page;
     }
@@ -45,6 +54,14 @@ public class ContentList {
         @SerializedName("poster_path")
         @Expose
         private String posterPath;
+
+
+        public Content(String id, String name, String title, String posterPath) {
+            this.id = id;
+            this.name = name;
+            this.title = title;
+            this.posterPath = posterPath;
+        }
 
         public String getId() {
             return id;

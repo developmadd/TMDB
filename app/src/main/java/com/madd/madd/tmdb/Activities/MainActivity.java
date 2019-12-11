@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.madd.madd.tmdb.ContentSearch.ContentSearchFragment;
-import com.madd.madd.tmdb.MovieDetail.MovieDetailFragment;
-import com.madd.madd.tmdb.MovieCatalog.MovieCatalogContainer;
-import com.madd.madd.tmdb.TVShowDetail.TVShowDetailFragment;
-import com.madd.madd.tmdb.TVShowCatalog.TVShowCatalogContainer;
+import com.madd.madd.tmdb.Fragments.ContentSearch.ContentSearchFragment;
+import com.madd.madd.tmdb.Fragments.MovieDetail.MovieDetailFragment;
+import com.madd.madd.tmdb.Fragments.MovieCatalog.MovieCatalogContainer;
+import com.madd.madd.tmdb.Fragments.TVShowDetail.TVShowDetailFragment;
+import com.madd.madd.tmdb.Fragments.TVShowCatalog.TVShowCatalogContainer;
 import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.HTTP.Models.TVShowList;
 import com.madd.madd.tmdb.R;

@@ -41,8 +41,9 @@ public class Movie {
     private String voteAverage;
 
 
+    public Movie() {
 
-
+    }
 
     public String getId() {
         return id;

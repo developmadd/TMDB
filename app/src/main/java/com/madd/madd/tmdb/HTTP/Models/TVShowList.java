@@ -10,11 +10,11 @@ public class TVShowList {
 
     @SerializedName("page")
     @Expose
-    int page;
+    private int page;
 
     @SerializedName("results")
     @Expose
-    List<TVShow> tvShowList;
+    private List<TVShow> tvShowList;
 
 
     public int getPage() {
@@ -27,6 +27,12 @@ public class TVShowList {
 
     public List<TVShow> getTvShowList() {
         return tvShowList;
+    }
+
+
+    public TVShowList(int page, List<TVShow> tvShowList) {
+        this.page = page;
+        this.tvShowList = tvShowList;
     }
 
     public static class TVShow {
@@ -42,6 +48,16 @@ public class TVShowList {
         @SerializedName("poster_path")
         @Expose
         private String posterPath;
+
+        public TVShow() {
+
+        }
+
+        public TVShow(String id, String name, String posterPath) {
+            this.id = id;
+            this.name = name;
+            this.posterPath = posterPath;
+        }
 
         public String getId() {
             return id;

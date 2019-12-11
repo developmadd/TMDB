@@ -30,7 +30,10 @@ public class MovieList {
     }
 
 
-
+    public MovieList(int page, List<Movie> movieList) {
+        this.page = page;
+        this.movieList = movieList;
+    }
 
     public static class Movie {
 
@@ -42,10 +45,18 @@ public class MovieList {
         @Expose
         private String title;
 
-
         @SerializedName("poster_path")
         @Expose
         private String posterPath;
+
+
+        public Movie() { }
+
+        public Movie(String id, String title, String posterPath) {
+            this.id = id;
+            this.title = title;
+            this.posterPath = posterPath;
+        }
 
         public String getId() {
             return id;
