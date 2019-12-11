@@ -9,6 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TMDBModule {
 
     private static String BASE_URL = "https://api.themoviedb.org/3/";
+    public static String TMDB_API_KEY = "5312d9a66aaa268a0e2aab662d455498";
+    public static int TMDB_PAGINATE_STEP = 20;
+    public static String TMDB_LANGUAGE = "es-MX";
 
     @Provides
     public Retrofit provideRetrofit(String baseUrl){

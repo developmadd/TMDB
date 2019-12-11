@@ -2,7 +2,7 @@ package com.madd.madd.tmdb.Fragments.TVShowCatalog;
 
 import com.madd.madd.tmdb.HTTP.Models.TVShowList;
 import com.madd.madd.tmdb.HTTP.TMDBApi;
-import com.madd.madd.tmdb.Utilities.References;
+import com.madd.madd.tmdb.HTTP.TMDBModule;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -10,16 +10,19 @@ import retrofit2.Response;
 
 public class TVShowCatalogModel implements TVShowCatalogContract.Model {
 
-    TMDBApi tmdbApi;
+    private TMDBApi tmdbApi;
 
-    public TVShowCatalogModel(TMDBApi tmdbApi) {
+    TVShowCatalogModel(TMDBApi tmdbApi) {
         this.tmdbApi = tmdbApi;
     }
 
 
     @Override
     public void getTVShowPopularList(int page, GetTVShowList tvShowList) {
-        Call<TVShowList> tvShowListCall = tmdbApi.getTVShowPopularList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
+        Call<TVShowList> tvShowListCall = tmdbApi.getTVShowPopularList(
+                TMDBModule.TMDB_API_KEY,
+                TMDBModule.TMDB_LANGUAGE,
+                page);
 
         tvShowListCall.enqueue(new Callback<TVShowList>() {
             @Override
@@ -36,7 +39,10 @@ public class TVShowCatalogModel implements TVShowCatalogContract.Model {
 
     @Override
     public void getTVShowTopRatedList(int page, GetTVShowList tvShowList) {
-        Call<TVShowList> tvShowListCall = tmdbApi.getTVShowTopRatedList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
+        Call<TVShowList> tvShowListCall = tmdbApi.getTVShowTopRatedList(
+                TMDBModule.TMDB_API_KEY,
+                TMDBModule.TMDB_LANGUAGE,
+                page);
 
         tvShowListCall.enqueue(new Callback<TVShowList>() {
             @Override
@@ -53,7 +59,10 @@ public class TVShowCatalogModel implements TVShowCatalogContract.Model {
 
     @Override
     public void getTVShowOnAirList(int page, GetTVShowList tvShowList) {
-        Call<TVShowList> tvShowListCall = tmdbApi.getTVShowOnAirList(References.TMDB_API_KEY,References.TMDB_LANGUAGE,page);
+        Call<TVShowList> tvShowListCall = tmdbApi.getTVShowOnAirList(
+                TMDBModule.TMDB_API_KEY,
+                TMDBModule.TMDB_LANGUAGE,
+                page);
 
         tvShowListCall.enqueue(new Callback<TVShowList>() {
             @Override

@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.madd.madd.tmdb.Fragments.ContentSearch.ContentSearchFragment;
+import com.madd.madd.tmdb.Fragments.MovieCatalogContainerFragment;
 import com.madd.madd.tmdb.Fragments.MovieDetail.MovieDetailFragment;
-import com.madd.madd.tmdb.Fragments.MovieCatalog.MovieCatalogContainer;
+import com.madd.madd.tmdb.Fragments.TVShowCatalogContainerFragment;
 import com.madd.madd.tmdb.Fragments.TVShowDetail.TVShowDetailFragment;
-import com.madd.madd.tmdb.Fragments.TVShowCatalog.TVShowCatalogContainer;
 import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.HTTP.Models.TVShowList;
 import com.madd.madd.tmdb.R;
@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FrameLayout detailContainer;
 
-    private MovieCatalogContainer movieCatalogContainer = new MovieCatalogContainer();
-    private TVShowCatalogContainer tvShowCatalogContainer = new TVShowCatalogContainer();
+    private MovieCatalogContainerFragment movieCatalogContainerFragment = new MovieCatalogContainerFragment();
+    private TVShowCatalogContainerFragment tvShowCatalogContainerFragment = new TVShowCatalogContainerFragment();
     private ContentSearchFragment contentSearchFragment = new ContentSearchFragment();
 
     @Override
@@ -51,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setEvents(){
 
-        movieCatalogContainer.setOnMovieSelected(this::showMovieDetail);
+        movieCatalogContainerFragment.setOnMovieSelected(this::showMovieDetail);
 
-        tvShowCatalogContainer.setOnTVShowSelected(this::showTVShowDetail);
+        tvShowCatalogContainerFragment.setOnTVShowSelected(this::showTVShowDetail);
 
         contentSearchFragment.setOnMovieSelected(this::showMovieDetail);
         contentSearchFragment.setOnTVShowSelected(this::showTVShowDetail);
@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.VP_Main);
 
         TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
-        tabAdapter.addFragment(movieCatalogContainer,"Películas");
-        tabAdapter.addFragment(tvShowCatalogContainer,"Series");
+        tabAdapter.addFragment(movieCatalogContainerFragment,"Películas");
+        tabAdapter.addFragment(tvShowCatalogContainerFragment,"Series");
         tabAdapter.addFragment(contentSearchFragment,"Todo");
 
         viewPager.setAdapter(tabAdapter);

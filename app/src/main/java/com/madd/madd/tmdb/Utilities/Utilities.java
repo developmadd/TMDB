@@ -128,14 +128,4 @@ public class Utilities {
 
 
 
-
-    // Interfaces utilizadas por diferentes clases
-
-    public interface GetJSONObject {
-        void jsonObject(String message, JSONObject jsonObject);
-    }
-
-    public interface GetMessage{
-        void message(String message);
-    }
 }

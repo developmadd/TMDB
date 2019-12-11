@@ -4,7 +4,7 @@ package com.madd.madd.tmdb.Fragments.ContentSearch;
 
 import com.madd.madd.tmdb.HTTP.Models.ContentList;
 import com.madd.madd.tmdb.HTTP.TMDBApi;
-import com.madd.madd.tmdb.Utilities.References;
+import com.madd.madd.tmdb.HTTP.TMDBModule;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,9 +13,9 @@ import retrofit2.Response;
 public class ContentSearchModel implements ContentSearchContract.Model {
 
 
-    TMDBApi tmdbApi;
+    private TMDBApi tmdbApi;
 
-    public ContentSearchModel(TMDBApi tmdbApi) {
+    ContentSearchModel(TMDBApi tmdbApi) {
         this.tmdbApi = tmdbApi;
     }
 
@@ -23,8 +23,8 @@ public class ContentSearchModel implements ContentSearchContract.Model {
     public void getMovieListByQuery(String query, int page, GetContentList getContentList) {
 
         Call<ContentList> contentListCall = tmdbApi.getMovieListByQuery(
-                References.TMDB_API_KEY,
-                References.TMDB_LANGUAGE,
+                TMDBModule.TMDB_API_KEY,
+                TMDBModule.TMDB_LANGUAGE,
                 query,page);
         contentListCall.enqueue(new Callback<ContentList>() {
             @Override
@@ -44,8 +44,8 @@ public class ContentSearchModel implements ContentSearchContract.Model {
     public void getTVShowListByQuery(String query, int page, GetContentList getContentList) {
 
         Call<ContentList> contentListCall = tmdbApi.getTVShowListByQuery(
-                References.TMDB_API_KEY,
-                References.TMDB_LANGUAGE,
+                TMDBModule.TMDB_API_KEY,
+                TMDBModule.TMDB_LANGUAGE,
                 query,page);
         contentListCall.enqueue(new Callback<ContentList>() {
             @Override

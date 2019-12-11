@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.Fragments.MovieCatalog;
+package com.madd.madd.tmdb.Fragments;
 
 
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.madd.madd.tmdb.Fragments.MovieCatalog.MovieCatalogContract;
+import com.madd.madd.tmdb.Fragments.MovieCatalog.MovieCatalogFragment;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
 import com.madd.madd.tmdb.Utilities.Utilities;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MovieCatalogContainer extends Fragment {
+public class MovieCatalogContainerFragment extends Fragment {
 
     @BindView(R.id.TAB_Movie_Search) TabLayout tabLayout;
     @BindView(R.id.VP_Movie_Search) ViewPager viewPager;
@@ -37,7 +39,7 @@ public class MovieCatalogContainer extends Fragment {
         this.onMovieSelected = onMovieSelected;
     }
 
-    public MovieCatalogContainer() {
+    public MovieCatalogContainerFragment() {
 
     }
 

@@ -42,17 +42,6 @@ public class InformativeDialog extends Fragment {
         });
     }
 
-    public void setData(String message, String title,
-                        OnAcceptClickListener onAcceptClickListener) {
-
-        textViewTittle.setText(title);
-        textViewMessage.setText(message);
-
-        buttonAccept.setOnClickListener(v -> {
-            alert.cancel();
-            onAcceptClickListener.onClick();
-        });
-    }
 
     private void bindUI(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -72,8 +61,5 @@ public class InformativeDialog extends Fragment {
 
 
 
-    public interface OnAcceptClickListener {
-        void onClick();
-    }
 }
 

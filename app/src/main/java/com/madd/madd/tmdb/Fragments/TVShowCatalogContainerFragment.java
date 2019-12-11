@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.Fragments.TVShowCatalog;
+package com.madd.madd.tmdb.Fragments;
 
 
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.madd.madd.tmdb.Fragments.TVShowCatalog.TVShowCatalogContract;
+import com.madd.madd.tmdb.Fragments.TVShowCatalog.TVShowCatalogFragment;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
 import com.madd.madd.tmdb.Utilities.Utilities;
@@ -20,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TVShowCatalogContainer extends Fragment {
+public class TVShowCatalogContainerFragment extends Fragment {
 
     private View view;
     @BindView(R.id.TAB_TVShow_Search)    TabLayout tabLayout;
@@ -37,7 +39,7 @@ public class TVShowCatalogContainer extends Fragment {
         this.onTVShowSelected = onTVShowSelected;
     }
 
-    public TVShowCatalogContainer() {
+    public TVShowCatalogContainerFragment() {
 
     }
 

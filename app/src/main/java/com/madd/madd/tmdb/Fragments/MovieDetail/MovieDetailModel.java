@@ -5,7 +5,7 @@ package com.madd.madd.tmdb.Fragments.MovieDetail;
 import com.madd.madd.tmdb.HTTP.Models.Cast;
 import com.madd.madd.tmdb.HTTP.Models.Movie;
 import com.madd.madd.tmdb.HTTP.TMDBApi;
-import com.madd.madd.tmdb.Utilities.References;
+import com.madd.madd.tmdb.HTTP.TMDBModule;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,15 +13,17 @@ import retrofit2.Response;
 
 public class MovieDetailModel implements MovieDetailContract.Model {
 
-    TMDBApi tmdbApi;
+    private TMDBApi tmdbApi;
 
-    public MovieDetailModel(TMDBApi tmdbApi) {
+    MovieDetailModel(TMDBApi tmdbApi) {
         this.tmdbApi = tmdbApi;
     }
 
     @Override
     public void getMovie(String movieId, GetMovie getMovie) {
-        Call<Movie> movieCall = tmdbApi.getMovie(movieId, References.TMDB_API_KEY,References.TMDB_LANGUAGE);
+        Call<Movie> movieCall = tmdbApi.getMovie(movieId,
+                TMDBModule.TMDB_API_KEY,
+                TMDBModule.TMDB_LANGUAGE);
         movieCall.enqueue(new Callback<Movie>() {
             @Override
             public void onResponse(Call<Movie> call, Response<Movie> response) {
@@ -37,7 +39,8 @@ public class MovieDetailModel implements MovieDetailContract.Model {
 
     @Override
     public void getMovieCast(String movieId, GetCast getCast) {
-        Call<Cast> castCall = tmdbApi.getMovieCast(movieId,References.TMDB_API_KEY);
+        Call<Cast> castCall = tmdbApi.getMovieCast(movieId,
+                TMDBModule.TMDB_API_KEY);
         castCall.enqueue(new Callback<Cast>() {
             @Override
             public void onResponse(Call<Cast> call, Response<Cast> response) {

@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.madd.madd.tmdb.HTTP.Models.ContentList;
+import com.madd.madd.tmdb.HTTP.TMDBModule;
 import com.madd.madd.tmdb.R;
-import com.madd.madd.tmdb.Utilities.References;
 
 import java.util.List;
 
@@ -82,7 +82,7 @@ public class ContentAdapter extends  RecyclerView.Adapter<ContentAdapter.ViewHol
                     contentEvents.onContentClick(content)
             );
 
-            int itemMinLimit = References.MOVIE_PAGINATE_STEP;
+            int itemMinLimit = TMDBModule.TMDB_PAGINATE_STEP;
             if ( contentList.size() >= itemMinLimit
                     && getAdapterPosition() == contentList.size() - 5 ) {
                 contentEvents.onRequestNextPage();

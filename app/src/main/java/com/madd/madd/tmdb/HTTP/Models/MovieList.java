@@ -2,7 +2,6 @@ package com.madd.madd.tmdb.HTTP.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.madd.madd.tmdb.Utilities.References;
 
 import java.util.List;
 
