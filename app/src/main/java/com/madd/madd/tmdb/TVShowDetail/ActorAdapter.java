@@ -1,6 +1,5 @@
-package com.madd.madd.tmdb.Models.Lists.Actor;
+package com.madd.madd.tmdb.TVShowDetail;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,9 +15,12 @@ import com.madd.madd.tmdb.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> {
 
-    private Context context;
+
     private List<Cast.Actor> actorCardList;
 
     ActorAdapter(List<Cast.Actor> actorCardList) {
@@ -28,8 +30,7 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int position) {
-        context = viewGroup.getContext();
-        View view = LayoutInflater.from(context).inflate(R.layout.section_actor,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.section_actor,viewGroup,false);
         return new ViewHolder(view);
     }
 
@@ -45,15 +46,13 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView imageView;
-        private TextView textViewName;
-        private TextView textViewCharacter;
+        @BindView(R.id.IV_Section_Actor) ImageView imageView;
+        @BindView(R.id.TV_Section_Actor_Name) TextView textViewName;
+        @BindView(R.id.TV_Section_Actor_Character) TextView textViewCharacter;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.IV_Section_Actor);
-            textViewName = itemView.findViewById(R.id.TV_Section_Actor_Name);
-            textViewCharacter = itemView.findViewById(R.id.TV_Section_Actor_Character);
+            ButterKnife.bind(this,itemView);
         }
 
         void bind( Cast.Actor actorCard ){
@@ -61,7 +60,6 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
                 Glide.with(imageView)
                         .load(actorCard.getProfilePath())
                         .centerCrop()
-                        .thumbnail(Glide.with(context).load(R.drawable.gif_load))
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imageView);
             } else {
@@ -71,6 +69,7 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imageView);
             }
+
             textViewName.setText(actorCard.getName());
             textViewCharacter.setText("\"" + actorCard.getCharacter() + "\"");
         }

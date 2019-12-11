@@ -56,7 +56,7 @@ public class Cast {
         }
 
         public String getCharacter() {
-            return character;
+            return character != null && !character.isEmpty() ? character : "Sin nombre";
         }
 
         public void setCharacter(String character) {

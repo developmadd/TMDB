@@ -10,15 +10,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.madd.madd.tmdb.Fragments.GeneralSearch;
-import com.madd.madd.tmdb.Fragments.Movie.MovieDetail;
-import com.madd.madd.tmdb.Fragments.Movie.MovieSearch;
-import com.madd.madd.tmdb.Fragments.TVShow.TVShowDetail;
-import com.madd.madd.tmdb.Fragments.TVShow.TVShowSearch;
+import com.madd.madd.tmdb.ContentSearch.ContentSearchFragment;
+import com.madd.madd.tmdb.MovieDetail.MovieDetailFragment;
+import com.madd.madd.tmdb.MovieCatalog.MovieCatalogContainer;
+import com.madd.madd.tmdb.TVShowDetail.TVShowDetailFragment;
+import com.madd.madd.tmdb.TVShowCatalog.TVShowCatalogContainer;
 import com.madd.madd.tmdb.HTTP.Models.MovieList;
+import com.madd.madd.tmdb.HTTP.Models.TVShowList;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.DI.App;
-import com.madd.madd.tmdb.Utilities.References;
 import com.madd.madd.tmdb.Utilities.TabAdapter;
 import com.madd.madd.tmdb.Utilities.Utilities;
 
@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     private FrameLayout detailContainer;
 
-    private MovieSearch movieSearch = new MovieSearch();
-    private TVShowSearch tvShowSearch = new TVShowSearch();
-    private GeneralSearch generalSearch = new GeneralSearch();
+    private MovieCatalogContainer movieCatalogContainer = new MovieCatalogContainer();
+    private TVShowCatalogContainer tvShowCatalogContainer = new TVShowCatalogContainer();
+    private ContentSearchFragment contentSearchFragment = new ContentSearchFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,36 +51,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void setEvents(){
 
-        movieSearch.setOnMovieSelected(this::showMovieDetail);
+        movieCatalogContainer.setOnMovieSelected(this::showMovieDetail);
 
-        tvShowSearch.setOnTVShowSelected(this::showTVShowDetail);
+        tvShowCatalogContainer.setOnTVShowSelected(this::showTVShowDetail);
 
-        generalSearch.setOnContentSelected(contentCard -> {
-            if( contentCard.getContentType() == References.MOVIE_TYPE ){
-                showMovieDetail(contentCard);
-            } else if ( contentCard.getContentType() == References.TV_TYPE ){
-                showTVShowDetail(contentCard);
-            }
-        });
+        contentSearchFragment.setOnMovieSelected(this::showMovieDetail);
+        contentSearchFragment.setOnTVShowSelected(this::showTVShowDetail);
 
     }
 
-    private void showTVShowDetail(MovieList.Movie tvShow){
-        TVShowDetail tvShowDetail = new TVShowDetail();
-        tvShowDetail.setTVShowId(tvShow.getId());
-        tvShowDetail.setOnTvShowDetailClose(this::hideDetail);
+    private void showTVShowDetail(TVShowList.TVShow tvShow){
+        TVShowDetailFragment tvShowDetailFragment = new TVShowDetailFragment();
+        tvShowDetailFragment.setTVShowId(tvShow.getId());
+        tvShowDetailFragment.setOnTvShowDetailClose(this::hideDetail);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.CTNR_Detail, tvShowDetail)
+        getSupportFragmentManager().beginTransaction().replace(R.id.CTNR_Detail, tvShowDetailFragment)
                 .commit();
         showDetail();
 
     }
     private void showMovieDetail(MovieList.Movie movie){
-        MovieDetail movieDetail = new MovieDetail();
-        movieDetail.setMovieId(movie.getId());
-        movieDetail.setOnMovieDetailClose(this::hideDetail);
+        MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
+        movieDetailFragment.setMovieId(movie.getId());
+        movieDetailFragment.setOnMovieDetailClose(this::hideDetail);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.CTNR_Detail, movieDetail)
+        getSupportFragmentManager().beginTransaction().replace(R.id.CTNR_Detail, movieDetailFragment)
                 .commit();
         showDetail();
     }
@@ -123,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.VP_Main);
 
         TabAdapter tabAdapter = new TabAdapter(getSupportFragmentManager());
-        tabAdapter.addFragment(movieSearch,"Películas");
-        tabAdapter.addFragment(tvShowSearch,"Series");
-        tabAdapter.addFragment(generalSearch,"Todo");
+        tabAdapter.addFragment(movieCatalogContainer,"Películas");
+        tabAdapter.addFragment(tvShowCatalogContainer,"Series");
+        tabAdapter.addFragment(contentSearchFragment,"Todo");
 
         viewPager.setAdapter(tabAdapter);
         tabLayout.setupWithViewPager(viewPager);

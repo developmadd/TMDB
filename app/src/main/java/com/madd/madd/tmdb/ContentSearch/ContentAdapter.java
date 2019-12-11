@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.TVShowCatalog;
+package com.madd.madd.tmdb.ContentSearch;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.madd.madd.tmdb.HTTP.Models.ContentList;
 import com.madd.madd.tmdb.HTTP.Models.MovieList;
-import com.madd.madd.tmdb.HTTP.Models.TVShow;
-import com.madd.madd.tmdb.HTTP.Models.TVShowList;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.References;
 
@@ -21,16 +20,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TVShowAdapter extends  RecyclerView.Adapter<TVShowAdapter.ViewHolder>{
+public class ContentAdapter extends  RecyclerView.Adapter<ContentAdapter.ViewHolder>{
 
 
-    private List<TVShowList.TVShow> tvShowList;
-    private TVShowEvents tvShowEvents;
+    private List<ContentList.Content> contentList;
+    private ContentEvents contentEvents;
 
-    TVShowAdapter(List<TVShowList.TVShow> tvShowList,
-                  TVShowEvents tvShowEvents) {
-        this.tvShowList = tvShowList;
-        this.tvShowEvents = tvShowEvents;
+    ContentAdapter(List<ContentList.Content> contentList,
+                   ContentEvents contentEvents) {
+        this.contentList = contentList;
+        this.contentEvents = contentEvents;
     }
 
     @NonNull
@@ -44,15 +43,15 @@ public class TVShowAdapter extends  RecyclerView.Adapter<TVShowAdapter.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        viewHolder.bind(tvShowList.get(position));
+        viewHolder.bind(contentList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return tvShowList.size();
+        return contentList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder{
 
 
         @BindView(R.id.IV_Section_Content_Poster) ImageView imageViewPoster;
@@ -63,10 +62,10 @@ public class TVShowAdapter extends  RecyclerView.Adapter<TVShowAdapter.ViewHolde
             ButterKnife.bind(this, itemView);
         }
 
-        void bind(TVShowList.TVShow tvShow){
-            if ( !tvShow.getPosterPath().isEmpty() ) {
+        void bind(ContentList.Content content){
+            if ( !content.getPosterPath().isEmpty() ) {
                 Glide.with(imageViewPoster)
-                        .load(tvShow.getPosterPath())
+                        .load(content.getPosterPath())
                         .centerCrop()
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imageViewPoster);
@@ -78,22 +77,22 @@ public class TVShowAdapter extends  RecyclerView.Adapter<TVShowAdapter.ViewHolde
                         .into(imageViewPoster);
             }
 
-            textViewTitle.setText(tvShow.getName());
+            textViewTitle.setText(content.getName());
 
             itemView.setOnClickListener(view ->
-                    tvShowEvents.onTVShowClick(tvShow)
+                    contentEvents.onContentClick(content)
             );
 
             int itemMinLimit = References.MOVIE_PAGINATE_STEP;
-            if ( tvShowList.size() >= itemMinLimit
-                    && getAdapterPosition() == tvShowList.size() - 5 ) {
-                tvShowEvents.onRequestNextPage();
+            if ( contentList.size() >= itemMinLimit
+                    && getAdapterPosition() == contentList.size() - 5 ) {
+                contentEvents.onRequestNextPage();
             }
         }
     }
 
-    public interface TVShowEvents {
-        void onTVShowClick(TVShowList.TVShow selectedTVShow);
+    public interface ContentEvents {
+        void onContentClick(ContentList.Content selectedContent);
         void onRequestNextPage();
 
     }

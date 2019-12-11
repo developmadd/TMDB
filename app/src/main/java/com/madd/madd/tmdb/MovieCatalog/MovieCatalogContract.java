@@ -10,7 +10,8 @@ public interface MovieCatalogContract {
         void showMovieList(List<MovieList.Movie> movieList, int page);
         void clearMovieList();
         void showEmptyListError();
-        void hideEmptyListError();
+        void showInternetError();
+        void hideError();
         void openMovieDetail(MovieList.Movie movie);
 
         List<MovieList.Movie> getMovieList();

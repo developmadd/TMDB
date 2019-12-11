@@ -65,11 +65,13 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
             if ( !movie.getPosterPath().isEmpty() ) {
                 Glide.with(imageViewPoster)
                         .load(movie.getPosterPath())
+                        .centerCrop()
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imageViewPoster);
             } else {
                 Glide.with(imageViewPoster)
                         .load(R.drawable.image_not_picture)
+                        .centerCrop()
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imageViewPoster);
             }

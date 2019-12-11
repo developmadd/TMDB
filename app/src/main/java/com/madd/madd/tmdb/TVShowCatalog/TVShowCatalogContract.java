@@ -10,7 +10,8 @@ public interface TVShowCatalogContract {
         void showTVShowList(List<TVShowList.TVShow> tvShowList, int page);
         void clearTVShowList();
         void showEmptyListError();
-        void hideEmptyListError();
+        void showInternetError();
+        void hideError();
         void openTVShowDetail(TVShowList.TVShow tvShow);
 
         List<TVShowList.TVShow> getTVShowList();

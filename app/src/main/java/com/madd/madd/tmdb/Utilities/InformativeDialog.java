@@ -3,6 +3,7 @@ package com.madd.madd.tmdb.Utilities;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
@@ -61,6 +62,7 @@ public class InformativeDialog extends Fragment {
         buttonAccept =  v.findViewById(R.id.BTN_Dialog_Informative_Accept);
         textViewTittle =  v.findViewById(R.id.TV_Dialog_Informative_Title);
         textViewMessage =  v.findViewById(R.id.TV_Dialog_Informative_Text);
+
 
         alert = builder.create();
         alert.show();

@@ -30,8 +30,13 @@ public class MovieCatalogPresenter implements MovieCatalogContract.Presenter {
             MovieCatalogContract.Model.GetMovieList getMovieList = new MovieCatalogContract.Model.GetMovieList() {
                 @Override
                 public void onSuccess(MovieList movieList) {
-                    view.hideEmptyListError();
                     view.showMovieList(movieList.getMovieList(),movieList.getPage() + 1);
+                    if(!movieList.getMovieList().isEmpty()){
+                        view.hideError();
+                        view.showMovieList(movieList.getMovieList(),movieList.getPage() + 1);
+                    } else {
+                        view.showEmptyListError();
+                    }
                 }
 
                 @Override
@@ -78,7 +83,13 @@ public class MovieCatalogPresenter implements MovieCatalogContract.Presenter {
                     filteredMovieList.add(movie);
                 }
             }
-            view.showMovieList(filteredMovieList,1);
+            if(!filteredMovieList.isEmpty()){
+                view.hideError();
+                view.showMovieList(filteredMovieList,1);
+            } else {
+                view.showEmptyListError();
+            }
+
         } else {
             movieList.clear();
             requestMovieList();

@@ -1,15 +1,7 @@
 package com.madd.madd.tmdb.HTTP.Models;
 
-import android.content.Context;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.madd.madd.tmdb.Services.MovieService;
-import com.madd.madd.tmdb.Utilities.References;
-import com.madd.madd.tmdb.Utilities.Utilities;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -49,21 +41,7 @@ public class Movie {
     private String voteAverage;
 
 
-    public class Genre {
 
-        @SerializedName("name")
-        @Expose
-        private String name;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-    }
 
 
     public String getId() {
@@ -83,7 +61,7 @@ public class Movie {
     }
 
     public String getPosterPath() {
-        return "https://image.tmdb.org/t/p/w500/" + posterPath;
+        return posterPath != null && !posterPath.isEmpty() ? "https://image.tmdb.org/t/p/w500/" + posterPath : "";
     }
 
     public void setPosterPath(String posterPath) {
@@ -91,7 +69,7 @@ public class Movie {
     }
 
     public String getBackdropPath() {
-        return "https://image.tmdb.org/t/p/w500/" + backdropPath;
+        return backdropPath != null && !backdropPath.isEmpty() ? "https://image.tmdb.org/t/p/w500/" + backdropPath : "";
     }
 
     public void setBackdropPath(String backdropPath) {
@@ -99,11 +77,11 @@ public class Movie {
     }
 
     public String getGenre() {
-        return genres.get(0).getName();
+        return genres != null && !genres.isEmpty() ? genres.get(0).getName() : "";
     }
 
     public String getYear() {
-        return year;
+        return year.substring(0,4);
     }
 
     public void setYear(String year) {
@@ -136,7 +114,21 @@ public class Movie {
 
 
 
+    public class Genre {
 
+        @SerializedName("name")
+        @Expose
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+    }
 
 
 }

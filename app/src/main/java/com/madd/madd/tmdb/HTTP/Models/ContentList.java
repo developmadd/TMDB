@@ -2,11 +2,10 @@ package com.madd.madd.tmdb.HTTP.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.madd.madd.tmdb.Utilities.References;
 
 import java.util.List;
 
-public class MovieList {
+public class ContentList {
 
     @SerializedName("page")
     @Expose
@@ -14,7 +13,7 @@ public class MovieList {
 
     @SerializedName("results")
     @Expose
-    List<Movie> movieList;
+    List<Content> contentList;
 
 
     public int getPage() {
@@ -25,23 +24,23 @@ public class MovieList {
         this.page = page;
     }
 
-    public List<Movie> getMovieList() {
-        return movieList;
+    public List<Content> getContentList() {
+        return contentList;
     }
 
-
-
-
-    public static class Movie {
+    public static class Content {
 
         @SerializedName("id")
         @Expose
         private String id;
 
+        @SerializedName("name")
+        @Expose
+        private String name;
+
         @SerializedName("title")
         @Expose
         private String title;
-
 
         @SerializedName("poster_path")
         @Expose
@@ -55,23 +54,22 @@ public class MovieList {
             this.id = id;
         }
 
-        public String getTitle() {
-            return title ;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
+        public String getName() {
+            return name == null ? title : name;
         }
 
         public String getPosterPath() {
-            return posterPath != null && !posterPath.isEmpty() ? "https://image.tmdb.org/t/p/w500/" + posterPath : "";
+            return "https://image.tmdb.org/t/p/w500/" + posterPath;
         }
 
         public void setPosterPath(String posterPath) {
             this.posterPath = posterPath;
         }
 
-    }
+        public boolean isMovie(){
+            return name == null;
+        }
 
+    }
 
 }

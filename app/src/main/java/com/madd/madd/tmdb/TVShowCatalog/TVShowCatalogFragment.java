@@ -15,11 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.madd.madd.tmdb.DI.App;
-import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.HTTP.Models.TVShowList;
-import com.madd.madd.tmdb.Models.Movie_TVShowList;
-import com.madd.madd.tmdb.MovieCatalog.MovieAdapter;
-import com.madd.madd.tmdb.MovieCatalog.MovieCatalogContract;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.Utilities.Utilities;
 
@@ -42,7 +38,7 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
 
 
     public static final int POPULAR_TYPE = 0;
-    public static final int UPCOMING_TYPE = 1;
+    public static final int ON_AIR_TYPE = 1;
     public static final int TOP_RATED_TYPE = 2;
 
 
@@ -51,7 +47,7 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
 
     @BindView(R.id.CTNR_TVShow_Catalog)  RecyclerView recyclerView;
     @BindView(R.id.SV_TVShow_Catalog)  SearchView searchView;
-    @BindView(R.id.TV_TVShow_Catalog_Empty)  TextView textViewEmpty;
+    @BindView(R.id.TV_TVShow_Catalog_Empty)  TextView textViewError;
 
 
     private TVShowAdapter tvShowAdapter;
@@ -89,7 +85,6 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
         View view = inflater.inflate(R.layout.fragment_tvshow_catalog, container, false);
         ButterKnife.bind(this,view);
         ((App) Objects.requireNonNull(getActivity()).getApplication()).getComponent().inject(this);
-
         loadView();
 
 
@@ -130,7 +125,7 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
 
             @Override
             public boolean onQueryTextChange(String query) {
-                presenter.filterMovieList(query);
+                presenter.filterTVShowList(query);
                 if( query.isEmpty() ){
                     Utilities.hideKeyboardFrom(searchView);
                 }
@@ -181,38 +176,48 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
 
     @Override
     public void showTVShowList(List<TVShowList.TVShow> tvShowList, int page) {
-        int fromIndex = this.movieList.size();
-        int toIndex = this.movieList.size() + movieList.size();
-        this.movieList.addAll(movieList);
+        int fromIndex = this.tvShowList.size();
+        int toIndex = this.tvShowList.size() + tvShowList.size();
+        this.tvShowList.addAll(tvShowList);
         this.page = page;
-        movieAdapter.notifyItemRangeInserted(fromIndex, toIndex);
+        tvShowAdapter.notifyItemRangeInserted(fromIndex, toIndex);
     }
 
     @Override
     public void clearTVShowList() {
-        this.movieList.clear();
+        this.tvShowList.clear();
         this.page = 1;
-        movieAdapter.notifyDataSetChanged();
+        tvShowAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showEmptyListError() {
-        textViewEmpty.setVisibility(View.VISIBLE);
+        textViewError.setText("Sin resultados");
+        textViewError.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideEmptyListError() {
-        textViewEmpty.setVisibility(View.GONE);
+    public void showInternetError() {
+        textViewError.setText("Sin conexión a Internet");
+        textViewError.setVisibility(View.VISIBLE);
     }
+
+    @Override
+    public void hideError() {
+        textViewError.setVisibility(View.GONE);
+        textViewError.setText("");
+    }
+
+
 
     @Override
     public void openTVShowDetail(TVShowList.TVShow tvShow) {
-        onMovieSelected.onMovieClick(tvShow);
+        onTVShowSelected.onTVShowClick(tvShow);
     }
 
     @Override
     public List<TVShowList.TVShow> getTVShowList() {
-        return movieList;
+        return tvShowList;
     }
 
 

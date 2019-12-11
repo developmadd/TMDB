@@ -42,7 +42,7 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
 
 
     @Inject MovieCatalogContract.Presenter presenter;
-
+    private View view;
     @BindView(R.id.CTNR_Movie_Catalog)  RecyclerView recyclerView;
     @BindView(R.id.SV_Movie_Catalog)  SearchView searchView;
     @BindView(R.id.TV_Movie_Catalog_Empty)  TextView textViewEmpty;
@@ -80,15 +80,17 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_movie_catalog, container, false);
-        ButterKnife.bind(this,view);
-        ((App) Objects.requireNonNull(getActivity()).getApplication()).getComponent().inject(this);
+        if( view == null ) {
+            view = inflater.inflate(R.layout.fragment_movie_catalog, container, false);
+            ButterKnife.bind(this, view);
+            ((App) Objects.requireNonNull(getActivity()).getApplication()).getComponent().inject(this);
 
-        loadView();
+            loadView();
 
 
-        presenter.setView(this);
-        presenter.requestMovieList();
+            presenter.setView(this);
+            presenter.requestMovieList();
+        }
         return view;
 
     }
@@ -125,7 +127,7 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
             @Override
             public boolean onQueryTextChange(String query) {
                 presenter.filterMovieList(query);
-                if( query.isEmpty() ){
+                if( query.isEmpty() ) {
                     Utilities.hideKeyboardFrom(searchView);
                 }
                 return false;
@@ -190,12 +192,20 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
     @Override
     public void showEmptyListError() {
         textViewEmpty.setVisibility(View.VISIBLE);
+        textViewEmpty.setText("Sin resultados");
     }
 
     @Override
-    public void hideEmptyListError() {
+    public void showInternetError() {
+        textViewEmpty.setVisibility(View.VISIBLE);
+        textViewEmpty.setText("Sin conexión a internet");
+    }
+
+    @Override
+    public void hideError() {
         textViewEmpty.setVisibility(View.GONE);
     }
+
 
     @Override
     public void openMovieDetail(MovieList.Movie movie) {

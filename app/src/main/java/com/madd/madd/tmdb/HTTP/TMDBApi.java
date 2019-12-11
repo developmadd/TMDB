@@ -1,6 +1,7 @@
 package com.madd.madd.tmdb.HTTP;
 
 import com.madd.madd.tmdb.HTTP.Models.Cast;
+import com.madd.madd.tmdb.HTTP.Models.ContentList;
 import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.HTTP.Models.Movie;
 import com.madd.madd.tmdb.HTTP.Models.TVShow;
@@ -44,10 +45,10 @@ public interface TMDBApi {
 
 
     @GET("search/movie")
-    Call<MovieList> getMovieListByQuery(@Query("api_key") String apiKey,
-                                        @Query("language") String language,
-                                        @Query("query") String query,
-                                        @Query("page") int page);
+    Call<ContentList> getMovieListByQuery(@Query("api_key") String apiKey,
+                                          @Query("language") String language,
+                                          @Query("query") String query,
+                                          @Query("page") int page);
 
 
 
@@ -88,7 +89,7 @@ public interface TMDBApi {
 
 
     @GET("search/tv")
-    Call<MovieList> getTVShowListByQuery(@Query("api_key") String apiKey,
+    Call<ContentList> getTVShowListByQuery(@Query("api_key") String apiKey,
                                         @Query("language") String language,
                                         @Query("query") String query,
                                         @Query("page") int page);
@@ -96,7 +97,7 @@ public interface TMDBApi {
 
 
     @GET("movie/{tv_show_id}/credits")
-    Call<Cast> getTVShowCast(@Path("movie_id") String movieId,
+    Call<Cast> getTVShowCast(@Path("tv_show_id") String tvShowId,
                             @Query("api_key") String apiKey);
 
 }
