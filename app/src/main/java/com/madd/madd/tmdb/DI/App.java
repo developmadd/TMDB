@@ -2,12 +2,12 @@ package com.madd.madd.tmdb.DI;
 
 import android.app.Application;
 
-import com.madd.madd.tmdb.Fragments.ContentSearch.ContentSearchModule;
+import com.madd.madd.tmdb.UI.Fragments.ContentSearch.ContentSearchModule;
 import com.madd.madd.tmdb.HTTP.TMDBModule;
-import com.madd.madd.tmdb.Fragments.MovieCatalog.MovieCatalogModule;
-import com.madd.madd.tmdb.Fragments.MovieDetail.MovieDetailModule;
-import com.madd.madd.tmdb.Fragments.TVShowCatalog.TVShowCatalogModule;
-import com.madd.madd.tmdb.Fragments.TVShowDetail.TVShowDetailModule;
+import com.madd.madd.tmdb.UI.Fragments.MovieCatalog.MovieCatalogModule;
+import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailModule;
+import com.madd.madd.tmdb.UI.Fragments.TVShowCatalog.TVShowCatalogModule;
+import com.madd.madd.tmdb.UI.Fragments.TVShowDetail.TVShowDetailModule;
 
 public class App extends Application {
 

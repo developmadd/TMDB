@@ -1,17 +1,17 @@
 package com.madd.madd.tmdb.DI;
 
-import com.madd.madd.tmdb.Activities.MainActivity;
-import com.madd.madd.tmdb.Fragments.ContentSearch.ContentSearchFragment;
-import com.madd.madd.tmdb.Fragments.ContentSearch.ContentSearchModule;
+import com.madd.madd.tmdb.UI.Activities.MainActivity;
+import com.madd.madd.tmdb.UI.Fragments.ContentSearch.ContentSearchFragment;
+import com.madd.madd.tmdb.UI.Fragments.ContentSearch.ContentSearchModule;
 import com.madd.madd.tmdb.HTTP.TMDBModule;
-import com.madd.madd.tmdb.Fragments.MovieCatalog.MovieCatalogFragment;
-import com.madd.madd.tmdb.Fragments.MovieCatalog.MovieCatalogModule;
-import com.madd.madd.tmdb.Fragments.MovieDetail.MovieDetailFragment;
-import com.madd.madd.tmdb.Fragments.MovieDetail.MovieDetailModule;
-import com.madd.madd.tmdb.Fragments.TVShowCatalog.TVShowCatalogFragment;
-import com.madd.madd.tmdb.Fragments.TVShowCatalog.TVShowCatalogModule;
-import com.madd.madd.tmdb.Fragments.TVShowDetail.TVShowDetailFragment;
-import com.madd.madd.tmdb.Fragments.TVShowDetail.TVShowDetailModule;
+import com.madd.madd.tmdb.UI.Fragments.MovieCatalog.MovieCatalogFragment;
+import com.madd.madd.tmdb.UI.Fragments.MovieCatalog.MovieCatalogModule;
+import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailFragment;
+import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailModule;
+import com.madd.madd.tmdb.UI.Fragments.TVShowCatalog.TVShowCatalogFragment;
+import com.madd.madd.tmdb.UI.Fragments.TVShowCatalog.TVShowCatalogModule;
+import com.madd.madd.tmdb.UI.Fragments.TVShowDetail.TVShowDetailFragment;
+import com.madd.madd.tmdb.UI.Fragments.TVShowDetail.TVShowDetailModule;
 
 import javax.inject.Singleton;
 
