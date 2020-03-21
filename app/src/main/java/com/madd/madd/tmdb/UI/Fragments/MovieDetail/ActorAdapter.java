@@ -13,6 +13,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.madd.madd.tmdb.HTTP.Models.Cast;
 import com.madd.madd.tmdb.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,10 +22,13 @@ import butterknife.ButterKnife;
 public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> {
 
 
-    private List<Cast.Actor> actorCardList;
+    private List<Cast.Actor> actorCardList = new ArrayList<>();
 
-    ActorAdapter(List<Cast.Actor> actorCardList) {
-        this.actorCardList = actorCardList;
+    public ActorAdapter() {
+    }
+
+    public List<Cast.Actor> getList() {
+        return actorCardList;
     }
 
     @NonNull

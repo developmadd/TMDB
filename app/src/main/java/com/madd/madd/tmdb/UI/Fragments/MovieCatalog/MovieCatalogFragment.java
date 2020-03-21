@@ -1,6 +1,7 @@
 package com.madd.madd.tmdb.UI.Fragments.MovieCatalog;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -17,9 +18,9 @@ import android.widget.TextView;
 import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.R;
 import com.madd.madd.tmdb.DI.App;
+import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailActivity;
 import com.madd.madd.tmdb.Utilities.Utilities;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,19 +52,17 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
     private MovieAdapter movieAdapter;
 
 
-    private List<MovieList.Movie> movieList = new ArrayList<>();
-    int page = 1;
     boolean searchBarAnimationStatus = false;
-    private MovieSelected onMovieSelected;
+    //private MovieSelected onMovieSelected;
     int listType;
 
 
     public void setListType(int listType) {
         this.listType = listType;
     }
-    public void setOnMovieSelected(MovieSelected onMovieSelected) {
+    /*public void setOnMovieSelected(MovieSelected onMovieSelected) {
         this.onMovieSelected = onMovieSelected;
-    }
+    }*/
 
 
 
@@ -104,7 +103,7 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
     private void loadView(){
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        movieAdapter = new MovieAdapter(movieList, new MovieAdapter.MovieEvents() {
+        movieAdapter = new MovieAdapter( new MovieAdapter.MovieEvents() {
             @Override
             public void onMovieClick(MovieList.Movie selectedMovie) {
                 presenter.selectMovie(selectedMovie);
@@ -175,17 +174,17 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
 
     @Override
     public void showMovieList(List<MovieList.Movie> movieList, int page) {
-        int fromIndex = this.movieList.size();
-        int toIndex = this.movieList.size() + movieList.size();
-        this.movieList.addAll(movieList);
-        this.page = page;
+        int fromIndex = movieAdapter.getList().size();
+        int toIndex = movieAdapter.getList().size() + movieList.size();
+        movieAdapter.getList().addAll(movieList);
+        movieAdapter.setPage(page);
         movieAdapter.notifyItemRangeInserted(fromIndex, toIndex);
     }
 
     @Override
     public void clearMovieList() {
-        this.movieList.clear();
-        this.page = 1;
+        movieAdapter.getList().clear();
+        movieAdapter.setPage(1);
         movieAdapter.notifyDataSetChanged();
     }
 
@@ -209,17 +208,21 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
 
     @Override
     public void openMovieDetail(MovieList.Movie movie) {
-        onMovieSelected.onMovieClick(movie);
+        //onMovieSelected.onMovieClick(movie);
+        Intent intent = new Intent();
+        intent.putExtra("movieId",movie.getId());
+        intent.setClass(requireContext(), MovieDetailActivity.class);
+        startActivity(intent);
     }
 
     @Override
     public List<MovieList.Movie> getMovieList() {
-        return movieList;
+        return movieAdapter.getList();
     }
 
     @Override
     public int getPage() {
-        return page;
+        return movieAdapter.getPage();
     }
 
     @Override

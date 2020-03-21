@@ -18,9 +18,6 @@ public interface TVShowCatalogContract {
         int getPage();
         int getListType();
 
-        interface TVShowSelected {
-            void onTVShowClick(TVShowList.TVShow tvShow);
-        }
     }
 
     interface Presenter{

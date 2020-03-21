@@ -1,12 +1,12 @@
 package com.madd.madd.tmdb.DI;
 
 import com.madd.madd.tmdb.UI.Activities.MainActivity;
+import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailActivity;
 import com.madd.madd.tmdb.UI.Fragments.ContentSearch.ContentSearchFragment;
 import com.madd.madd.tmdb.UI.Fragments.ContentSearch.ContentSearchModule;
 import com.madd.madd.tmdb.HTTP.TMDBModule;
 import com.madd.madd.tmdb.UI.Fragments.MovieCatalog.MovieCatalogFragment;
 import com.madd.madd.tmdb.UI.Fragments.MovieCatalog.MovieCatalogModule;
-import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailFragment;
 import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailModule;
 import com.madd.madd.tmdb.UI.Fragments.TVShowCatalog.TVShowCatalogFragment;
 import com.madd.madd.tmdb.UI.Fragments.TVShowCatalog.TVShowCatalogModule;
@@ -28,9 +28,9 @@ import dagger.Component;
 public interface ApplicationComponent {
 
     void inject(MainActivity target);
+    void inject(MovieDetailActivity target);
     void inject(MovieCatalogFragment target);
     void inject(TVShowCatalogFragment target);
-    void inject(MovieDetailFragment target);
     void inject(TVShowDetailFragment target);
     void inject(ContentSearchFragment target);
 }

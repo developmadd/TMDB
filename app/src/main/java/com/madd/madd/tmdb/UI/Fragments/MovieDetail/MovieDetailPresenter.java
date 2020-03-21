@@ -17,12 +17,6 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
         this.view = view;
     }
 
-    @Override
-    public void closeDetail() {
-        if( view != null ){
-            view.closeDetail();
-        }
-    }
 
     @Override
     public void getMovie() {

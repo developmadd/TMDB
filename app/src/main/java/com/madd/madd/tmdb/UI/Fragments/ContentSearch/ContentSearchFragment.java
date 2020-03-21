@@ -53,16 +53,6 @@ public class ContentSearchFragment extends Fragment implements ContentSearchCont
     boolean searchBarAnimationStatus = false;
     private CountDownTimer countDownTimer;
 
-    private ContentSearchContract.View.MovieSelected onMovieSelected;
-    private ContentSearchContract.View.TVShowSelected onTVShowSelected;
-
-    public void setOnMovieSelected(ContentSearchContract.View.MovieSelected onMovieSelected) {
-        this.onMovieSelected = onMovieSelected;
-    }
-
-    public void setOnTVShowSelected(ContentSearchContract.View.TVShowSelected onTVShowSelected) {
-        this.onTVShowSelected = onTVShowSelected;
-    }
 
 
 
@@ -257,12 +247,12 @@ public class ContentSearchFragment extends Fragment implements ContentSearchCont
 
     @Override
     public void openMovieDetail(MovieList.Movie movie) {
-        onMovieSelected.onMovieClick(movie);
+        //onMovieSelected.onMovieClick(movie);
     }
 
     @Override
     public void openTVShowDetail(TVShowList.TVShow tvShow) {
-        onTVShowSelected.onTVShowClick(tvShow);
+        //onTVShowSelected.onTVShowClick(tvShow);
     }
 
 

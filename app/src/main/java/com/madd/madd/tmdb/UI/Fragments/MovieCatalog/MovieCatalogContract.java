@@ -18,9 +18,6 @@ public interface MovieCatalogContract {
         int getPage();
         int getListType();
 
-        interface MovieSelected {
-            void onMovieClick(MovieList.Movie movie);
-        }
     }
 
     interface Presenter{

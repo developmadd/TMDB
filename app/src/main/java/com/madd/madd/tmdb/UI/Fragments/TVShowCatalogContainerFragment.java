@@ -34,10 +34,7 @@ public class TVShowCatalogContainerFragment extends Fragment {
     private TVShowCatalogFragment tvShowTopRatedCatalog;
 
 
-    private TVShowCatalogContract.View.TVShowSelected onTVShowSelected;
-    public void setOnTVShowSelected(TVShowCatalogContract.View.TVShowSelected onTVShowSelected) {
-        this.onTVShowSelected = onTVShowSelected;
-    }
+
 
     public TVShowCatalogContainerFragment() {
 
@@ -68,15 +65,12 @@ public class TVShowCatalogContainerFragment extends Fragment {
 
         tvShowPopularCatalog = new TVShowCatalogFragment();
         tvShowPopularCatalog.setListType(TVShowCatalogFragment.POPULAR_TYPE);
-        tvShowPopularCatalog.setOnTVShowSelected(onTVShowSelected);
 
         tvShowOnAirCatalog = new TVShowCatalogFragment();
         tvShowOnAirCatalog.setListType(TVShowCatalogFragment.ON_AIR_TYPE);
-        tvShowOnAirCatalog.setOnTVShowSelected(onTVShowSelected);
 
         tvShowTopRatedCatalog = new TVShowCatalogFragment();
         tvShowTopRatedCatalog.setListType(TVShowCatalogFragment.TOP_RATED_TYPE);
-        tvShowTopRatedCatalog.setOnTVShowSelected(onTVShowSelected);
 
 
     }

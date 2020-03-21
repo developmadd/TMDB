@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 
 import com.madd.madd.tmdb.UI.Fragments.ContentSearch.ContentSearchFragment;
 import com.madd.madd.tmdb.UI.Fragments.MovieCatalogContainerFragment;
-import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailFragment;
 import com.madd.madd.tmdb.UI.Fragments.TVShowCatalogContainerFragment;
 import com.madd.madd.tmdb.UI.Fragments.TVShowDetail.TVShowDetailFragment;
 import com.madd.madd.tmdb.HTTP.Models.MovieList;
@@ -25,7 +24,6 @@ import com.madd.madd.tmdb.Utilities.Utilities;
 public class MainActivity extends AppCompatActivity {
 
 
-    private FrameLayout detailContainer;
 
     private MovieCatalogContainerFragment movieCatalogContainerFragment = new MovieCatalogContainerFragment();
     private TVShowCatalogContainerFragment tvShowCatalogContainerFragment = new TVShowCatalogContainerFragment();
@@ -38,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
         ((App)getApplication()).getComponent().inject(this);
         bindUI();
-        setEvents();
     }
 
 
@@ -49,61 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private void setEvents(){
-
-        movieCatalogContainerFragment.setOnMovieSelected(this::showMovieDetail);
-
-        tvShowCatalogContainerFragment.setOnTVShowSelected(this::showTVShowDetail);
-
-        contentSearchFragment.setOnMovieSelected(this::showMovieDetail);
-        contentSearchFragment.setOnTVShowSelected(this::showTVShowDetail);
-
-    }
-
-    private void showTVShowDetail(TVShowList.TVShow tvShow){
-        TVShowDetailFragment tvShowDetailFragment = new TVShowDetailFragment();
-        tvShowDetailFragment.setTVShowId(tvShow.getId());
-        tvShowDetailFragment.setOnTvShowDetailClose(this::hideDetail);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.CTNR_Detail, tvShowDetailFragment)
-                .commit();
-        showDetail();
-
-    }
-    private void showMovieDetail(MovieList.Movie movie){
-        MovieDetailFragment movieDetailFragment = new MovieDetailFragment();
-        movieDetailFragment.setMovieId(movie.getId());
-        movieDetailFragment.setOnMovieDetailClose(this::hideDetail);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.CTNR_Detail, movieDetailFragment)
-                .commit();
-        showDetail();
-    }
 
 
-    public void showDetail() {
-
-        detailContainer.setAlpha(0f);
-        detailContainer.setVisibility(View.VISIBLE);
-
-        detailContainer.animate()
-                .alpha(1f)
-                .setDuration(500)
-                .setListener(null);
-    }
-
-    public void hideDetail() {
-
-        detailContainer.animate()
-                .alpha(0f)
-                .setDuration(500)
-                .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        detailContainer.setVisibility(View.GONE);
-                    }
-                });
-    }
 
 
 
@@ -129,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 ContextCompat.getColor(this, R.color.colorWhite));
         Utilities.hideKeyboardFromTab(tabLayout);
 
-        detailContainer = findViewById(R.id.CTNR_Detail);
     }
 
 
@@ -141,14 +84,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-    @Override
-    public void onBackPressed() {
-        if (detailContainer.getVisibility() == View.VISIBLE ) {
-            hideDetail();
-        } else {
-            super.onBackPressed();
-        }
-    }
 
 }

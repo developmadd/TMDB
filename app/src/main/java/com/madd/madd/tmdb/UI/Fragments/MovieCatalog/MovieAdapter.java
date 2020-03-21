@@ -14,6 +14,7 @@ import com.madd.madd.tmdb.HTTP.Models.MovieList;
 import com.madd.madd.tmdb.HTTP.TMDBModule;
 import com.madd.madd.tmdb.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,13 +23,24 @@ import butterknife.ButterKnife;
 public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
 
-    private List<MovieList.Movie> movieList;
+    private List<MovieList.Movie> movieList = new ArrayList<>();
+    private int page = 1;
     private MovieEvents movieEvents;
 
-    MovieAdapter(List<MovieList.Movie> movieList,
-                 MovieEvents movieEvents) {
-        this.movieList = movieList;
+    MovieAdapter(MovieEvents movieEvents) {
         this.movieEvents = movieEvents;
+    }
+
+    public List<MovieList.Movie> getList() {
+        return movieList;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
     }
 
     @NonNull

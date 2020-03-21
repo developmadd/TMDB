@@ -22,7 +22,6 @@ public interface MovieDetailContract {
     interface Presenter{
         void setView(MovieDetailContract.View view);
 
-        void closeDetail();
         void getMovie();
         void getCast();
     }

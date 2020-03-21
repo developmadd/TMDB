@@ -34,10 +34,7 @@ public class MovieCatalogContainerFragment extends Fragment {
     private MovieCatalogFragment movieTopRateCatalog;
 
 
-    private MovieCatalogContract.View.MovieSelected onMovieSelected;
-    public void setOnMovieSelected(MovieCatalogContract.View.MovieSelected onMovieSelected) {
-        this.onMovieSelected = onMovieSelected;
-    }
+
 
     public MovieCatalogContainerFragment() {
 
@@ -68,15 +65,15 @@ public class MovieCatalogContainerFragment extends Fragment {
 
         moviePopularCatalog = new MovieCatalogFragment();
         moviePopularCatalog.setListType(MovieCatalogFragment.POPULAR_TYPE);
-        moviePopularCatalog.setOnMovieSelected(onMovieSelected);
+        //moviePopularCatalog.setOnMovieSelected(onMovieSelected);
 
         movieUpcomingCatalog = new MovieCatalogFragment();
         movieUpcomingCatalog.setListType(MovieCatalogFragment.UPCOMING_TYPE);
-        movieUpcomingCatalog.setOnMovieSelected(onMovieSelected);
+        //movieUpcomingCatalog.setOnMovieSelected(onMovieSelected);
 
         movieTopRateCatalog = new MovieCatalogFragment();
         movieTopRateCatalog.setListType(MovieCatalogFragment.TOP_RATED_TYPE);
-        movieTopRateCatalog.setOnMovieSelected(onMovieSelected);
+        //movieTopRateCatalog.setOnMovieSelected(onMovieSelected);
 
 
     }

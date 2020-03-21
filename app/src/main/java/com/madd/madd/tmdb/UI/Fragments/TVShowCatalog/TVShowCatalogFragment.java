@@ -56,16 +56,14 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
     private List<TVShowList.TVShow> tvShowList = new ArrayList<>();
     int page = 1;
     boolean searchBarAnimationStatus = false;
-    private TVShowCatalogContract.View.TVShowSelected onTVShowSelected;
+
     int listType;
 
 
     public void setListType(int listType) {
         this.listType = listType;
     }
-    public void setOnTVShowSelected(TVShowCatalogContract.View.TVShowSelected onTVShowSelected) {
-        this.onTVShowSelected = onTVShowSelected;
-    }
+
 
 
 
@@ -212,7 +210,7 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
 
     @Override
     public void openTVShowDetail(TVShowList.TVShow tvShow) {
-        onTVShowSelected.onTVShowClick(tvShow);
+        //onTVShowSelected.onTVShowClick(tvShow);
     }
 
     @Override

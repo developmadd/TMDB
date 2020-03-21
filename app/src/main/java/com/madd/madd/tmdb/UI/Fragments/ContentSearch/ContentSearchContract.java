@@ -21,12 +21,6 @@ public interface ContentSearchContract {
         int getMoviePage();
         int getTVShowPage();
 
-        interface MovieSelected {
-            void onMovieClick(MovieList.Movie movie);
-        }
-        interface TVShowSelected {
-            void onTVShowClick(TVShowList.TVShow tvShow);
-        }
     }
 
     interface Presenter{
