@@ -2,12 +2,16 @@ package com.madd.madd.tmdb.DI;
 
 import android.app.Application;
 
-import com.madd.madd.tmdb.UI.Fragments.ContentSearch.ContentSearchModule;
-import com.madd.madd.tmdb.HTTP.TMDBModule;
-import com.madd.madd.tmdb.UI.Fragments.MovieCatalog.MovieCatalogModule;
-import com.madd.madd.tmdb.UI.Fragments.MovieDetail.MovieDetailModule;
-import com.madd.madd.tmdb.UI.Fragments.TVShowCatalog.TVShowCatalogModule;
-import com.madd.madd.tmdb.UI.Fragments.TVShowDetail.TVShowDetailModule;
+import com.madd.madd.tmdb.Data.Cast.CastDataModule;
+import com.madd.madd.tmdb.Data.ContentList.ContentListDataModule;
+import com.madd.madd.tmdb.Data.Movie.MovieDataModule;
+import com.madd.madd.tmdb.Data.TVShow.TVShowDataModule;
+import com.madd.madd.tmdb.UI.ContentSearch.ContentSearchModule;
+import com.madd.madd.tmdb.Data.HTTP.HTTPModule;
+import com.madd.madd.tmdb.UI.MovieCatalog.MovieCatalogModule;
+import com.madd.madd.tmdb.UI.MovieDetail.MovieDetailModule;
+import com.madd.madd.tmdb.UI.TVShowCatalog.TVShowCatalogModule;
+import com.madd.madd.tmdb.UI.TVShowDetail.TVShowDetailModule;
 
 public class App extends Application {
 
@@ -23,7 +27,12 @@ public class App extends Application {
                     .movieDetailModule(new MovieDetailModule())
                     .tVShowDetailModule(new TVShowDetailModule())
                     .contentSearchModule(new ContentSearchModule())
-                    .tMDBModule(new TMDBModule())
+
+                    .hTTPModule(new HTTPModule())
+                    .movieDataModule(new MovieDataModule())
+                    .tVShowDataModule(new TVShowDataModule())
+                    .castDataModule(new CastDataModule())
+                    .contentListDataModule(new ContentListDataModule())
                     .build();
     }
 

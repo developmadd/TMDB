@@ -13,9 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.Fragments.MovieDetail.MovieDetailActivity"></activity>
+        <activity android:name=".UI.TVShowDetail.TVShowDetailActivity"></activity>
+        <activity android:name=".UI.MovieDetail.MovieDetailActivity" />
         <activity
-            android:name=".UI.Activities.SplashScreen"
+            android:name=".UI.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.Activities.MainActivity">
+        <activity android:name=".UI.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
