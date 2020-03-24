@@ -1,7 +1,7 @@
 package com.madd.madd.tmdb.data.entities.ContentList;
 
 import com.madd.madd.tmdb.data.entities.ContentList.Source.Remote.ContentListRemoteDataSource;
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 
 import dagger.Module;
 import dagger.Provides;

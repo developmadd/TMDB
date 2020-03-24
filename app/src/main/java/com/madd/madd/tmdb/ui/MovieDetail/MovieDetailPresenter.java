@@ -1,5 +1,6 @@
 package com.madd.madd.tmdb.ui.MovieDetail;
 
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.Cast.CastDataSource;
 import com.madd.madd.tmdb.data.entities.Cast.Model.Cast;
 import com.madd.madd.tmdb.data.entities.Movie.Model.Movie;
@@ -27,7 +28,7 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
     public void getMovie() {
         if( view != null ) {
             view.showLoadingProgress();
-            movieRepository.getMovie(view.getMovieId(), new MovieDataSource.GetMovie() {
+            movieRepository.getMovie(view.getMovieId(), new DataSource.GetEntity<Movie>() {
                 @Override
                 public void onSuccess(Movie movie) {
                     view.showMovie(movie);

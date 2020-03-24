@@ -1,6 +1,6 @@
 package com.madd.madd.tmdb.data.entities.Movie;
 
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 import com.madd.madd.tmdb.data.entities.Movie.Source.Local.MovieCacheDataSource;
 import com.madd.madd.tmdb.data.entities.Movie.Source.Remote.MovieRemoteDataSource;
 

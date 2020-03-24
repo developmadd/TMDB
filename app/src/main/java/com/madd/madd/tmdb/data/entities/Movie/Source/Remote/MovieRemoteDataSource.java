@@ -1,6 +1,7 @@
 package com.madd.madd.tmdb.data.entities.Movie.Source.Remote;
 
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.entities.DataSource;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 import com.madd.madd.tmdb.data.entities.Movie.Model.Movie;
 import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
 import com.madd.madd.tmdb.data.entities.Movie.MovieDataSource;
@@ -17,8 +18,11 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
         this.api = api;
     }
 
+
+
+
     @Override
-    public void getMovie(String movieId, MovieDataSource.GetMovie getMovie) {
+    public void getMovie(String movieId, DataSource.GetEntity<Movie> getMovie) {
         Call<Movie> movieCall = api.getMovie(movieId,
                 TMDBApi.TMDB_API_KEY,
                 TMDBApi.TMDB_LANGUAGE);
@@ -35,9 +39,8 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
         });
     }
 
-
     @Override
-    public void getMoviePopularList(int page, MovieDataSource.GetMovieList getMovieList) {
+    public void getMoviePopularList(int page, DataSource.GetEntity<MovieList> getMovieList) {
         Call<MovieList> movieListCall = api.getMoviePopularList(
                 TMDBApi.TMDB_API_KEY,
                 TMDBApi.TMDB_LANGUAGE,
@@ -59,8 +62,7 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
     }
 
     @Override
-    public void getMovieUpcomingList(int page, MovieDataSource.GetMovieList getMovieList){
-
+    public void getMovieUpcomingList(int page, DataSource.GetEntity<MovieList> getMovieList) {
         Call<MovieList> movieListCall = api.getMovieUpcomingList(
                 TMDBApi.TMDB_API_KEY,
                 TMDBApi.TMDB_LANGUAGE,
@@ -79,12 +81,10 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
 
 
         });
-
     }
 
     @Override
-    public void getMovieTopRatedList(int page, MovieDataSource.GetMovieList getMovieList) {
-
+    public void getMovieTopRatedList(int page, DataSource.GetEntity<MovieList> getMovieList) {
         Call<MovieList> movieListCall = api.getMovieTopRatedList(
                 TMDBApi.TMDB_API_KEY,
                 TMDBApi.TMDB_LANGUAGE,
@@ -103,7 +103,9 @@ public class MovieRemoteDataSource implements MovieDataSource.Remote {
 
 
         });
-
     }
+
+
+
 
 }

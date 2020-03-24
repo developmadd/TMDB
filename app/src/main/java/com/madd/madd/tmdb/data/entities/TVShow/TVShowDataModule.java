@@ -1,6 +1,6 @@
 package com.madd.madd.tmdb.data.entities.TVShow;
 
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 import com.madd.madd.tmdb.data.entities.TVShow.Source.Local.TVShowCacheDataSource;
 import com.madd.madd.tmdb.data.entities.TVShow.Source.Remote.TVShowRemoteDataSource;
 

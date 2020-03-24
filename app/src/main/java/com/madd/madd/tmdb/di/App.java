@@ -7,7 +7,7 @@ import com.madd.madd.tmdb.data.entities.ContentList.ContentListDataModule;
 import com.madd.madd.tmdb.data.entities.Movie.MovieDataModule;
 import com.madd.madd.tmdb.data.entities.TVShow.TVShowDataModule;
 import com.madd.madd.tmdb.ui.ContentSearch.ContentSearchModule;
-import com.madd.madd.tmdb.data.HTTP.HTTPModule;
+import com.madd.madd.tmdb.data.http.HTTPModule;
 import com.madd.madd.tmdb.ui.MovieCatalog.MovieCatalogModule;
 import com.madd.madd.tmdb.ui.MovieDetail.MovieDetailModule;
 import com.madd.madd.tmdb.ui.TVShowCatalog.TVShowCatalogModule;

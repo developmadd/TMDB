@@ -1,5 +1,6 @@
 package com.madd.madd.tmdb.data.entities.Movie;
 
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.Movie.Model.Movie;
 import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
 
@@ -9,40 +10,40 @@ public interface MovieDataSource {
 
 
     interface Repository {
-        void getMovie(String movieId, MovieDataSource.GetMovie getMovie);
+        void getMovie(String movieId, DataSource.GetEntity<Movie> getMovie);
 
-        void refreshMoviePopularList(GetList<MovieList.Movie> getMovieList);
-        void refreshMovieUpcomingList(GetList<MovieList.Movie> getMovieList);
-        void refreshMovieTopRatedList(GetList<MovieList.Movie> getMovieList);
+        void refreshMoviePopularList(DataSource.GetList<MovieList.Movie> getMovieList);
+        void refreshMovieUpcomingList(DataSource.GetList<MovieList.Movie> getMovieList);
+        void refreshMovieTopRatedList(DataSource.GetList<MovieList.Movie> getMovieList);
 
-        void requestNextMoviePopularList(GetList<MovieList.Movie> getMovieList);
-        void requestNextMovieUpcomingList(GetList<MovieList.Movie> getMovieList);
-        void requestNextMovieTopRatedList(GetList<MovieList.Movie> getMovieList);
+        void requestNextMoviePopularList(DataSource.GetList<MovieList.Movie> getMovieList);
+        void requestNextMovieUpcomingList(DataSource.GetList<MovieList.Movie> getMovieList);
+        void requestNextMovieTopRatedList(DataSource.GetList<MovieList.Movie> getMovieList);
 
-        void getFilteredPopularList(String text, GetList<MovieList.Movie> getMovieList);
-        void getFilteredUpcomingList(String text, GetList<MovieList.Movie> getMovieList);
-        void getFilteredTopRatedList(String text, GetList<MovieList.Movie> getMovieList);
+        void getFilteredPopularList(String text, DataSource.GetList<MovieList.Movie> getMovieList);
+        void getFilteredUpcomingList(String text, DataSource.GetList<MovieList.Movie> getMovieList);
+        void getFilteredTopRatedList(String text, DataSource.GetList<MovieList.Movie> getMovieList);
     }
 
     interface Remote{
 
-        void getMovie(String movieId, GetMovie getMovie);
+        void getMovie(String movieId, DataSource.GetEntity<Movie> getMovie);
 
-        void getMoviePopularList(int page, GetMovieList movieList);
-        void getMovieUpcomingList(int page, GetMovieList movieList);
-        void getMovieTopRatedList(int page, GetMovieList movieList);
+        void getMoviePopularList(int page, DataSource.GetEntity<MovieList> movieList);
+        void getMovieUpcomingList(int page, DataSource.GetEntity<MovieList> movieList);
+        void getMovieTopRatedList(int page, DataSource.GetEntity<MovieList> movieList);
     }
 
     interface Cache{
-        void getMovie(String movieId, GetMovie getMovie);
+        void getMovie(String movieId, DataSource.GetEntity<Movie> getMovie);
 
-        void getMoviePopularList(int page, GetMovieList movieList);
-        void getMovieUpcomingList(int page, GetMovieList movieList);
-        void getMovieTopRatedList(int page, GetMovieList movieList);
+        void getMoviePopularList(int page, DataSource.GetEntity<MovieList> movieList);
+        void getMovieUpcomingList(int page, DataSource.GetEntity<MovieList> movieList);
+        void getMovieTopRatedList(int page, DataSource.GetEntity<MovieList> movieList);
 
-        void getFilteredPopularList(String text, GetList<MovieList.Movie> getMovieList);
-        void getFilteredUpcomingList(String text, GetList<MovieList.Movie> getMovieList);
-        void getFilteredTopRatedList(String text, GetList<MovieList.Movie> getMovieList);
+        void getFilteredPopularList(String text, DataSource.GetList<MovieList.Movie> getMovieList);
+        void getFilteredUpcomingList(String text, DataSource.GetList<MovieList.Movie> getMovieList);
+        void getFilteredTopRatedList(String text, DataSource.GetList<MovieList.Movie> getMovieList);
 
         void setMovie(Movie movie);
         void setMoviePopularList( List<MovieList.Movie> movieList);
@@ -52,19 +53,8 @@ public interface MovieDataSource {
 
 
 
-    interface GetMovieList{
-        void onSuccess(MovieList movieList);
-        void onError(String error);
-    }
 
-    interface GetList<T>{
-        void onSuccess(List<T> list);
-        void onError(String error);
-    }
 
-    interface GetMovie{
-        void onSuccess(Movie movie);
-        void onError(String error);
-    }
+
 
 }

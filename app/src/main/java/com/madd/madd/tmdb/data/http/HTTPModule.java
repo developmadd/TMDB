@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.data.HTTP;
+package com.madd.madd.tmdb.data.http;
 
 import android.content.Context;
 

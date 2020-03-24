@@ -2,7 +2,7 @@ package com.madd.madd.tmdb.data.entities.Cast;
 
 import com.madd.madd.tmdb.data.entities.Cast.Source.Local.CastCacheDataSource;
 import com.madd.madd.tmdb.data.entities.Cast.Source.Remote.CastRemoteDataSource;
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 
 import javax.inject.Singleton;
 

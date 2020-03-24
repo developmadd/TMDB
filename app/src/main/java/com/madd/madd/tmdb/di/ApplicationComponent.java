@@ -8,7 +8,7 @@ import com.madd.madd.tmdb.ui.MainActivity;
 import com.madd.madd.tmdb.ui.MovieDetail.MovieDetailActivity;
 import com.madd.madd.tmdb.ui.ContentSearch.ContentSearchFragment;
 import com.madd.madd.tmdb.ui.ContentSearch.ContentSearchModule;
-import com.madd.madd.tmdb.data.HTTP.HTTPModule;
+import com.madd.madd.tmdb.data.http.HTTPModule;
 import com.madd.madd.tmdb.ui.MovieCatalog.MovieCatalogFragment;
 import com.madd.madd.tmdb.ui.MovieCatalog.MovieCatalogModule;
 import com.madd.madd.tmdb.ui.MovieDetail.MovieDetailModule;

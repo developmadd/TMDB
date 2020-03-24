@@ -1,5 +1,6 @@
 package com.madd.madd.tmdb.data.entities.Movie;
 
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.Movie.Model.Movie;
 import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
 
@@ -24,9 +25,12 @@ public class MovieRepository implements MovieDataSource.Repository {
 
 
 
+
+
+
     @Override
-    public void getMovie(String movieId, MovieDataSource.GetMovie getMovie) {
-        movieCacheDataSource.getMovie(movieId, new MovieDataSource.GetMovie() {
+    public void getMovie(String movieId, DataSource.GetEntity<Movie> getMovie) {
+        movieCacheDataSource.getMovie(movieId, new DataSource.GetEntity<Movie>()  {
             @Override
             public void onSuccess(Movie movie) {
                 getMovie.onSuccess(movie);
@@ -34,7 +38,7 @@ public class MovieRepository implements MovieDataSource.Repository {
 
             @Override
             public void onError(String error) {
-                movieRemoteDataSource.getMovie(movieId, new MovieDataSource.GetMovie() {
+                movieRemoteDataSource.getMovie(movieId, new DataSource.GetEntity<Movie>() {
                     @Override
                     public void onSuccess(Movie movie) {
                         movieCacheDataSource.setMovie(movie);
@@ -43,41 +47,36 @@ public class MovieRepository implements MovieDataSource.Repository {
 
                     @Override
                     public void onError(String error) {
-
+                        getMovie.onError(error);
                     }
                 });
             }
         });
-
     }
 
-
-
-
-
     @Override
-    public void refreshMoviePopularList(MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void refreshMoviePopularList(DataSource.GetList<MovieList.Movie> getMovieList) {
         popularPage = 1;
         requestNextMoviePopularList(getMovieList);
     }
 
     @Override
-    public void refreshMovieUpcomingList(MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void refreshMovieUpcomingList(DataSource.GetList<MovieList.Movie> getMovieList) {
         upcomingPage = 1;
         requestNextMovieUpcomingList(getMovieList);
     }
 
     @Override
-    public void refreshMovieTopRatedList(MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void refreshMovieTopRatedList(DataSource.GetList<MovieList.Movie> getMovieList) {
         topRatedPage = 1;
         requestNextMovieTopRatedList(getMovieList);
     }
 
 
     @Override
-    public void requestNextMoviePopularList(MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void requestNextMoviePopularList(DataSource.GetList<MovieList.Movie> getMovieList) {
 
-        movieCacheDataSource.getMoviePopularList(popularPage, new MovieDataSource.GetMovieList() {
+        movieCacheDataSource.getMoviePopularList(popularPage, new DataSource.GetEntity<MovieList>() {
             @Override
             public void onSuccess(MovieList movieList) {
                 popularPage++;
@@ -86,7 +85,7 @@ public class MovieRepository implements MovieDataSource.Repository {
 
             @Override
             public void onError(String error) {
-                movieRemoteDataSource.getMoviePopularList(popularPage, new MovieDataSource.GetMovieList() {
+                movieRemoteDataSource.getMoviePopularList(popularPage, new DataSource.GetEntity<MovieList>() {
                     @Override
                     public void onSuccess(MovieList movieList) {
                         popularPage++;
@@ -104,8 +103,8 @@ public class MovieRepository implements MovieDataSource.Repository {
     }
 
     @Override
-    public void requestNextMovieUpcomingList(MovieDataSource.GetList<MovieList.Movie> getMovieList) {
-        movieCacheDataSource.getMovieUpcomingList(upcomingPage, new MovieDataSource.GetMovieList() {
+    public void requestNextMovieUpcomingList(DataSource.GetList<MovieList.Movie> getMovieList) {
+        movieCacheDataSource.getMovieUpcomingList(upcomingPage, new DataSource.GetEntity<MovieList>() {
             @Override
             public void onSuccess(MovieList movieList) {
                 upcomingPage++;
@@ -114,7 +113,7 @@ public class MovieRepository implements MovieDataSource.Repository {
 
             @Override
             public void onError(String error) {
-                movieRemoteDataSource.getMovieUpcomingList(upcomingPage, new MovieDataSource.GetMovieList() {
+                movieRemoteDataSource.getMovieUpcomingList(upcomingPage, new DataSource.GetEntity<MovieList>() {
                     @Override
                     public void onSuccess(MovieList movieList) {
                         upcomingPage++;
@@ -133,8 +132,8 @@ public class MovieRepository implements MovieDataSource.Repository {
     }
 
     @Override
-    public void requestNextMovieTopRatedList(MovieDataSource.GetList<MovieList.Movie> getMovieList) {
-        movieCacheDataSource.getMovieTopRatedList(topRatedPage, new MovieDataSource.GetMovieList() {
+    public void requestNextMovieTopRatedList(DataSource.GetList<MovieList.Movie> getMovieList) {
+        movieCacheDataSource.getMovieTopRatedList(topRatedPage, new DataSource.GetEntity<MovieList>() {
             @Override
             public void onSuccess(MovieList movieList) {
                 topRatedPage++;
@@ -143,7 +142,7 @@ public class MovieRepository implements MovieDataSource.Repository {
 
             @Override
             public void onError(String error) {
-                movieRemoteDataSource.getMovieTopRatedList(topRatedPage, new MovieDataSource.GetMovieList() {
+                movieRemoteDataSource.getMovieTopRatedList(topRatedPage, new DataSource.GetEntity<MovieList>() {
                     @Override
                     public void onSuccess(MovieList movieList) {
                         topRatedPage++;
@@ -164,17 +163,17 @@ public class MovieRepository implements MovieDataSource.Repository {
 
 
     @Override
-    public void getFilteredPopularList(String text, MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void getFilteredPopularList(String text, DataSource.GetList<MovieList.Movie> getMovieList) {
         movieCacheDataSource.getFilteredPopularList(text, getMovieList);
     }
 
     @Override
-    public void getFilteredUpcomingList(String text, MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void getFilteredUpcomingList(String text, DataSource.GetList<MovieList.Movie> getMovieList) {
         movieCacheDataSource.getFilteredUpcomingList(text, getMovieList);
     }
 
     @Override
-    public void getFilteredTopRatedList(String text, MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void getFilteredTopRatedList(String text, DataSource.GetList<MovieList.Movie> getMovieList) {
         movieCacheDataSource.getFilteredTopRatedList(text, getMovieList);
     }
 

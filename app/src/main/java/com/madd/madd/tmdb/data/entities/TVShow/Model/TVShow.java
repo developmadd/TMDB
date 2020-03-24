@@ -47,6 +47,7 @@ public class TVShow {
     @Expose
     private String voteAverage;
 
+    private long tampStamp;
 
 
     public TVShow() {
@@ -139,8 +140,13 @@ public class TVShow {
         this.voteAverage = voteAverage;
     }
 
+    public long getTampStamp() {
+        return tampStamp;
+    }
 
-
+    public void setTampStamp() {
+        this.tampStamp = System.currentTimeMillis();
+    }
 
     public class Genre {
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 import com.madd.madd.tmdb.data.entities.ContentList.Model.ContentList;
 import com.madd.madd.tmdb.R;
 

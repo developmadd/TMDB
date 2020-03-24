@@ -1,10 +1,9 @@
 package com.madd.madd.tmdb.ui.TVShowCatalog;
 
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.TVShow.Model.TVShowList;
 import com.madd.madd.tmdb.data.entities.TVShow.TVShowDataSource;
-import com.madd.madd.tmdb.utilities.Utilities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TVShowCatalogPresenter implements TVShowCatalogContract.Presenter {
@@ -12,9 +11,7 @@ public class TVShowCatalogPresenter implements TVShowCatalogContract.Presenter {
     private TVShowCatalogContract.View view;
     private TVShowDataSource.Repository repository;
 
-    private List<TVShowList.TVShow> tvShowList = new ArrayList<>();
-
-    public TVShowCatalogPresenter(TVShowDataSource.Repository repository) {
+    TVShowCatalogPresenter(TVShowDataSource.Repository repository) {
         this.repository = repository;
     }
 
@@ -25,20 +22,17 @@ public class TVShowCatalogPresenter implements TVShowCatalogContract.Presenter {
 
     @Override
     public void requestTVShowList() {
-        int page = view.getPage();
 
-        TVShowDataSource.GetTVShowList getTVShowList = new TVShowDataSource.GetTVShowList() {
+        DataSource.GetList<TVShowList.TVShow> getTVShowList = new DataSource.GetList<TVShowList.TVShow>() {
 
             @Override
-            public void onSuccess(TVShowList tvShowList) {
-
-                if(!tvShowList.getTvShowList().isEmpty()){
+            public void onSuccess(List<TVShowList.TVShow> tvShowList) {
+                if(!tvShowList.isEmpty()){
                     view.hideError();
-                    view.showTVShowList(tvShowList.getTvShowList(),tvShowList.getPage() + 1);
+                    view.showTVShowList(tvShowList);
                 } else {
                     view.showEmptyListError();
                 }
-
             }
 
             @Override
@@ -48,50 +42,67 @@ public class TVShowCatalogPresenter implements TVShowCatalogContract.Presenter {
         };
 
         if( view.getListType() == TVShowCatalogFragment.POPULAR_TYPE ) {
-            repository.getTVShowPopularList(page, getTVShowList);
+            repository.requestNextTVShowPopularList(getTVShowList);
         } else if( view.getListType() == TVShowCatalogFragment.TOP_RATED_TYPE ){
-            repository.getTVShowTopRatedList(page, getTVShowList);
+            repository.requestNextTVShowTopRatedList(getTVShowList);
         } else if( view.getListType() == TVShowCatalogFragment.ON_AIR_TYPE ){
-            repository.getTVShowOnAirList(page, getTVShowList);
+            repository.requestNextTVShowOnAirList(getTVShowList);
         }
 
     }
 
     @Override
-    public void filterTVShowList(String query) {
-        if( tvShowList.isEmpty() ) {
-            tvShowList = new ArrayList<>(view.getTVShowList());
-        }
+    public void refreshMovieList() {
 
-        List<TVShowList.TVShow> filteredTVShowList = new ArrayList<>();
+        DataSource.GetList<TVShowList.TVShow> tvShowGetList = new DataSource.GetList<TVShowList.TVShow>() {
+            @Override
+            public void onSuccess(List<TVShowList.TVShow> tvShowList) {
+                if(!tvShowList.isEmpty()){
+                    view.hideError();
+                    view.showTVShowList(tvShowList);
+                } else {
+                    view.showEmptyListError();
+                }
+            }
+
+            @Override
+            public void onError(String error) {
+                view.showInternetError();
+            }
+        };
+        if( view.getListType() == TVShowCatalogFragment.POPULAR_TYPE ) {
+            repository.refreshTVShowPopularList(tvShowGetList);
+        } else if( view.getListType() == TVShowCatalogFragment.TOP_RATED_TYPE ){
+            repository.refreshTVShowTopRatedList(tvShowGetList);
+        } else if( view.getListType() == TVShowCatalogFragment.ON_AIR_TYPE ){
+            repository.refreshTVShowOnAirList(tvShowGetList);
+        }
+    }
+
+    @Override
+    public void filterTVShowList(String query) {
         view.clearTVShowList();
 
-        if (!query.isEmpty()) {
-            String compare = Utilities.cleanString(query);
-            for (TVShowList.TVShow tvShow : tvShowList) {
+        DataSource.GetList<TVShowList.TVShow> getTVShowList = new DataSource.GetList<TVShowList.TVShow>() {
 
-                String original = Utilities.cleanString(tvShow.getName());
-                if (original.startsWith(compare)) {
-                    filteredTVShowList.add(tvShow);
-                }
-            }
-            for (TVShowList.TVShow tvShow : tvShowList) {
-
-                String original = Utilities.cleanString(tvShow.getName());
-                if ( !original.startsWith(compare) && original.contains(compare) ) {
-                    filteredTVShowList.add(tvShow);
-                }
-            }
-            if(!filteredTVShowList.isEmpty()){
+            @Override
+            public void onSuccess(List<TVShowList.TVShow> tvShowList) {
                 view.hideError();
-                view.showTVShowList(filteredTVShowList,1);
-            } else {
+                view.showTVShowList(tvShowList);
+            }
+
+            @Override
+            public void onError(String error) {
                 view.showEmptyListError();
             }
+        };
 
-        } else {
-            tvShowList.clear();
-            requestTVShowList();
+        if( view.getListType() == TVShowCatalogFragment.POPULAR_TYPE ) {
+            repository.getFilteredPopularList(query, getTVShowList);
+        } else if( view.getListType() == TVShowCatalogFragment.TOP_RATED_TYPE ){
+            repository.getFilteredTopRatedList(query, getTVShowList);
+        } else if( view.getListType() == TVShowCatalogFragment.ON_AIR_TYPE ){
+            repository.getFilteredOnAirList(query, getTVShowList);
         }
     }
 

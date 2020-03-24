@@ -1,5 +1,6 @@
 package com.madd.madd.tmdb.ui.TVShowDetail;
 
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.Cast.CastDataSource;
 import com.madd.madd.tmdb.data.entities.Cast.Model.Cast;
 import com.madd.madd.tmdb.data.entities.TVShow.Model.TVShow;
@@ -28,8 +29,7 @@ public class TVShowDetailPresenter implements TVShowDetailContract.Presenter {
     public void getTVShow() {
         if( view != null ){
             view.showLoadingProgress();
-            tvShowRepository.getTVShow(view.getTVShowId(), new TVShowDataSource.GetTVShow() {
-
+            tvShowRepository.getTVShow(view.getTVShowId(), new DataSource.GetEntity<TVShow>() {
                 @Override
                 public void onSuccess(TVShow tvShow) {
                     view.showTVShow(tvShow);

@@ -1,4 +1,4 @@
-package com.madd.madd.tmdb.data.HTTP;
+package com.madd.madd.tmdb.data.http;
 
 import com.madd.madd.tmdb.data.entities.Cast.Model.Cast;
 import com.madd.madd.tmdb.data.entities.ContentList.Model.ContentList;

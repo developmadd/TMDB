@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 import com.madd.madd.tmdb.data.entities.TVShow.Model.TVShowList;
 import com.madd.madd.tmdb.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,13 +24,15 @@ import butterknife.ButterKnife;
 public class TVShowAdapter extends  RecyclerView.Adapter<TVShowAdapter.ViewHolder>{
 
 
-    private List<TVShowList.TVShow> tvShowList;
+    private List<TVShowList.TVShow> tvShowList = new ArrayList<>();
     private TVShowEvents tvShowEvents;
 
-    TVShowAdapter(List<TVShowList.TVShow> tvShowList,
-                  TVShowEvents tvShowEvents) {
-        this.tvShowList = tvShowList;
+    TVShowAdapter(TVShowEvents tvShowEvents) {
         this.tvShowEvents = tvShowEvents;
+    }
+
+    public List<TVShowList.TVShow> getList() {
+        return tvShowList;
     }
 
     @NonNull

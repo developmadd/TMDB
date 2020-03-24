@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -145,9 +146,7 @@ public class MovieDetailActivity extends AppCompatActivity implements  MovieDeta
 
     @Override
     public void showMovieError() {
-        InformativeDialog.getInstance(this).setData(
-                "Ha ocurrido un problema al tratar de mostrar el contenido seleccionado",
-                "Error");
+        Toast.makeText(this,"Ha ocurrido un problema al tratar de mostrar el contenido seleccionado, revise su conexión a Internet",Toast.LENGTH_LONG).show();
         finish();
     }
 

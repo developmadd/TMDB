@@ -1,7 +1,8 @@
 package com.madd.madd.tmdb.data.entities.Movie.Source.Local;
 
 
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.entities.DataSource;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 import com.madd.madd.tmdb.data.entities.Movie.Model.Movie;
 import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
 import com.madd.madd.tmdb.data.entities.Movie.MovieDataSource;
@@ -25,8 +26,9 @@ public class MovieCacheDataSource implements MovieDataSource.Cache {
     private long CACHE_LIFETIME = 1000 * 60;
 
 
+
     @Override
-    public void getMovie(String movieId, MovieDataSource.GetMovie getMovie) {
+    public void getMovie(String movieId, DataSource.GetEntity<Movie> getMovie) {
         Movie movie = movieMap.get(movieId);
         if( movie != null ){
             if ( System.currentTimeMillis() - movie.getTampStamp() < CACHE_LIFETIME ) {
@@ -40,7 +42,7 @@ public class MovieCacheDataSource implements MovieDataSource.Cache {
     }
 
     @Override
-    public void getMoviePopularList(int page, MovieDataSource.GetMovieList getMovieList) {
+    public void getMoviePopularList(int page, DataSource.GetEntity<MovieList> getMovieList) {
         if (System.currentTimeMillis() - lastTimeStampPopular < CACHE_LIFETIME ){
             if( popularMovieList.size() >= TMDBApi.TMDB_PAGINATE_STEP * page ) {
                 int nPage = popularMovieList.size() / TMDBApi.TMDB_PAGINATE_STEP;
@@ -56,7 +58,7 @@ public class MovieCacheDataSource implements MovieDataSource.Cache {
     }
 
     @Override
-    public void getMovieUpcomingList(int page, MovieDataSource.GetMovieList getMovieList) {
+    public void getMovieUpcomingList(int page, DataSource.GetEntity<MovieList> getMovieList) {
         if (System.currentTimeMillis() - lastTimeStampUpcoming < CACHE_LIFETIME ){
             if( upcomingMovieList.size() >= TMDBApi.TMDB_PAGINATE_STEP * page ) {
                 int nPage = upcomingMovieList.size() / TMDBApi.TMDB_PAGINATE_STEP;
@@ -72,7 +74,7 @@ public class MovieCacheDataSource implements MovieDataSource.Cache {
     }
 
     @Override
-    public void getMovieTopRatedList(int page, MovieDataSource.GetMovieList getMovieList) {
+    public void getMovieTopRatedList(int page, DataSource.GetEntity<MovieList> getMovieList) {
         if (System.currentTimeMillis() - lastTimeStampTopRated < CACHE_LIFETIME ){
             if( topRatedMovieList.size() >= TMDBApi.TMDB_PAGINATE_STEP * page ) {
                 int nPage = topRatedMovieList.size() / TMDBApi.TMDB_PAGINATE_STEP;
@@ -90,9 +92,14 @@ public class MovieCacheDataSource implements MovieDataSource.Cache {
 
 
 
+
+
+
+
+
     private void getFilteredMovieList( String text,
                                        List<MovieList.Movie> movieList,
-                                       MovieDataSource.GetList<MovieList.Movie> getMovieList){
+                                       DataSource.GetList<MovieList.Movie> getMovieList){
         if (!text.isEmpty()) {
 
             List<MovieList.Movie> filteredMovieList = new ArrayList<>();
@@ -123,17 +130,17 @@ public class MovieCacheDataSource implements MovieDataSource.Cache {
     }
 
     @Override
-    public void getFilteredPopularList(String text, MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void getFilteredPopularList(String text, DataSource.GetList<MovieList.Movie> getMovieList) {
         getFilteredMovieList(text,popularMovieList,getMovieList);
     }
 
     @Override
-    public void getFilteredUpcomingList(String text, MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void getFilteredUpcomingList(String text, DataSource.GetList<MovieList.Movie> getMovieList) {
         getFilteredMovieList(text,upcomingMovieList,getMovieList);
     }
 
     @Override
-    public void getFilteredTopRatedList(String text, MovieDataSource.GetList<MovieList.Movie> getMovieList) {
+    public void getFilteredTopRatedList(String text, DataSource.GetList<MovieList.Movie> getMovieList) {
         getFilteredMovieList(text,topRatedMovieList,getMovieList);
     }
 

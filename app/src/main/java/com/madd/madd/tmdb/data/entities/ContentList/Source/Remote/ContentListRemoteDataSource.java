@@ -2,7 +2,7 @@ package com.madd.madd.tmdb.data.entities.ContentList.Source.Remote;
 
 import com.madd.madd.tmdb.data.entities.ContentList.ContentListDataSource;
 import com.madd.madd.tmdb.data.entities.ContentList.Model.ContentList;
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 
 import retrofit2.Call;
 import retrofit2.Callback;

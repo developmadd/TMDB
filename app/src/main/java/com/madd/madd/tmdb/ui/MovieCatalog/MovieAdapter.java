@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-import com.madd.madd.tmdb.data.HTTP.TMDBApi;
+import com.madd.madd.tmdb.data.http.TMDBApi;
 import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
 import com.madd.madd.tmdb.R;
 
@@ -24,7 +24,6 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
 
 
     private List<MovieList.Movie> movieList = new ArrayList<>();
-    private int page = 1;
     private MovieEvents movieEvents;
 
     MovieAdapter(MovieEvents movieEvents) {
@@ -35,13 +34,6 @@ public class MovieAdapter extends  RecyclerView.Adapter<MovieAdapter.ViewHolder>
         return movieList;
     }
 
-    /*public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }*/
 
     @NonNull
     @Override

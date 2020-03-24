@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,8 +38,6 @@ import butterknife.ButterKnife;
 public class TVShowCatalogFragment extends Fragment implements TVShowCatalogContract.View {
 
 
-
-
     public static final int POPULAR_TYPE = 0;
     public static final int ON_AIR_TYPE = 1;
     public static final int TOP_RATED_TYPE = 2;
@@ -50,15 +49,11 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
     @BindView(R.id.CTNR_TVShow_Catalog)  RecyclerView recyclerView;
     @BindView(R.id.SV_TVShow_Catalog)  SearchView searchView;
     @BindView(R.id.TV_TVShow_Catalog_Empty)  TextView textViewError;
+    @BindView(R.id.SRL_TVShow_Catalog) SwipeRefreshLayout swipeRefreshLayout;
 
 
     private TVShowAdapter tvShowAdapter;
-
-
-    private List<TVShowList.TVShow> tvShowList = new ArrayList<>();
-    int page = 1;
     boolean searchBarAnimationStatus = false;
-
     int listType;
 
 
@@ -103,7 +98,7 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
     private void loadView(){
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        tvShowAdapter = new TVShowAdapter(tvShowList, new TVShowAdapter.TVShowEvents() {
+        tvShowAdapter = new TVShowAdapter(new TVShowAdapter.TVShowEvents() {
             @Override
             public void onTVShowClick(TVShowList.TVShow selectedTVShow) {
                 presenter.selectTVShow(selectedTVShow);
@@ -163,6 +158,10 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
             }
         });
 
+        swipeRefreshLayout.setOnRefreshListener(() ->
+                presenter.refreshMovieList()
+        );
+
     }
 
     @Override
@@ -175,18 +174,16 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
 
 
     @Override
-    public void showTVShowList(List<TVShowList.TVShow> tvShowList, int page) {
-        int fromIndex = this.tvShowList.size();
-        int toIndex = this.tvShowList.size() + tvShowList.size();
-        this.tvShowList.addAll(tvShowList);
-        this.page = page;
+    public void showTVShowList(List<TVShowList.TVShow> tvShowList) {
+        int fromIndex = tvShowAdapter.getList().size();
+        int toIndex = tvShowAdapter.getList().size() + tvShowList.size();
+        tvShowAdapter.getList().addAll(tvShowList);
         tvShowAdapter.notifyItemRangeInserted(fromIndex, toIndex);
     }
 
     @Override
     public void clearTVShowList() {
-        this.tvShowList.clear();
-        this.page = 1;
+        tvShowAdapter.getList().clear();
         tvShowAdapter.notifyDataSetChanged();
     }
 
@@ -208,6 +205,10 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
         textViewError.setText("");
     }
 
+    @Override
+    public void hideRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
 
     @Override
@@ -218,19 +219,7 @@ public class TVShowCatalogFragment extends Fragment implements TVShowCatalogCont
         startActivity(intent);
     }
 
-    @Override
-    public List<TVShowList.TVShow> getTVShowList() {
-        return tvShowList;
-    }
 
-
-
-
-
-    @Override
-    public int getPage() {
-        return page;
-    }
 
     @Override
     public int getListType() {

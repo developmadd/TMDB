@@ -7,14 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.MovieCatalog.MovieCatalogFragment">
 
-
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/SRL_TVShow_Catalog"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:translationY="40dp"
-        android:clickable="true"
-        android:id="@+id/CTNR_TVShow_Catalog"
-        android:focusable="true" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:translationY="40dp"
+            android:clickable="true"
+            android:id="@+id/CTNR_TVShow_Catalog"
+            android:focusable="true" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.v7.widget.SearchView
         android:layout_width="match_parent"

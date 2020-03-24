@@ -1,5 +1,6 @@
 package com.madd.madd.tmdb.ui.MovieCatalog;
 
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
 import com.madd.madd.tmdb.data.entities.Movie.MovieDataSource;
 
@@ -25,7 +26,7 @@ public class MovieCatalogPresenter implements MovieCatalogContract.Presenter {
     public void refreshMovieList() {
         if(view != null) {
             view.clearMovieList();
-            MovieDataSource.GetList<MovieList.Movie> getMovieList = new MovieDataSource.GetList<MovieList.Movie>() {
+            DataSource.GetList<MovieList.Movie> getMovieList = new DataSource.GetList<MovieList.Movie>() {
                 @Override
                 public void onSuccess(List<MovieList.Movie> movieList) {
                     if(!movieList.isEmpty()){
@@ -59,7 +60,7 @@ public class MovieCatalogPresenter implements MovieCatalogContract.Presenter {
     public void requestMovieList() {
         if( view != null ){
 
-            MovieDataSource.GetList<MovieList.Movie> getMovieList = new MovieDataSource.GetList<MovieList.Movie>() {
+            DataSource.GetList<MovieList.Movie> getMovieList = new DataSource.GetList<MovieList.Movie>() {
                 @Override
                 public void onSuccess(List<MovieList.Movie> movieList) {
                     if(!movieList.isEmpty()){
@@ -91,7 +92,7 @@ public class MovieCatalogPresenter implements MovieCatalogContract.Presenter {
     public void filterMovieList(String query) {
         view.clearMovieList();
 
-        MovieDataSource.GetList<MovieList.Movie> getMovieList = new MovieDataSource.GetList<MovieList.Movie>() {
+        DataSource.GetList<MovieList.Movie> getMovieList = new DataSource.GetList<MovieList.Movie>() {
             @Override
             public void onSuccess(List<MovieList.Movie> movieList) {
                 view.hideError();

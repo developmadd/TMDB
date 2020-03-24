@@ -51,8 +51,6 @@ public class MovieCatalogFragment extends Fragment implements MovieCatalogContra
     @BindView(R.id.SW_Movie_Catalog)  SwipeRefreshLayout swipeRefreshLayout;
 
     private MovieAdapter movieAdapter;
-
-
     boolean searchBarAnimationStatus = false;
     int listType;
 
