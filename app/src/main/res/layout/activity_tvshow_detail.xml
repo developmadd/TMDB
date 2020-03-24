@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBlack"
-    tools:context="com.madd.madd.tmdb.UI.TVShowDetail.TVShowDetailActivity">
+    tools:context="com.madd.madd.tmdb.ui.TVShowDetail.TVShowDetailActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
