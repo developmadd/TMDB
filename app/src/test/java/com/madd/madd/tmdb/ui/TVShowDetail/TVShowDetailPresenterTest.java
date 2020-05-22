@@ -1,6 +1,11 @@
 package com.madd.madd.tmdb.ui.TVShowDetail;
 
+import com.madd.madd.tmdb.data.entities.Cast.CastDataSource;
+import com.madd.madd.tmdb.data.entities.Cast.CastRepository;
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.TVShow.Model.TVShow;
+import com.madd.madd.tmdb.data.entities.TVShow.TVShowDataSource;
+import com.madd.madd.tmdb.data.entities.TVShow.TVShowRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,17 +22,20 @@ public class TVShowDetailPresenterTest {
 
     private TVShowDetailPresenter presenter;
 
-    private TVShowDetailContract.Model mockedModel;
+    private TVShowDataSource.Repository mockedTVRepository;
+    private CastDataSource.Repository mockedCastRepository;
     private TVShowDetailContract.View mockedView;
 
     @Before
     public void setUp(){
 
-        mockedModel = mock(TVShowDetailContract.Model.class);
+        mockedTVRepository = mock(TVShowRepository.class);
+        mockedCastRepository = mock(CastRepository.class);
         mockedView = mock(TVShowDetailContract.View.class);
 
-        presenter = new TVShowDetailPresenter(mockedModel);
+        presenter = new TVShowDetailPresenter(mockedTVRepository,mockedCastRepository);
         presenter.setView(mockedView);
+
 
     }
 
@@ -45,9 +53,9 @@ public class TVShowDetailPresenterTest {
     public void showMovieWithoutInternet(){
         when(mockedView.getTVShowId()).thenReturn("tvShowId");
         doAnswer(invocation -> {
-            ((TVShowDetailContract.Model.GetTVShow)invocation.getArguments()[1]).onError("sin internet");
+            ((DataSource.GetEntity)invocation.getArguments()[1]).onError("sin internet");
             return null;
-        }).when(mockedModel).getTVShow(eq("tvShowId"),any(TVShowDetailContract.Model.GetTVShow.class));
+        }).when(mockedTVRepository).getTVShow(eq("tvShowId"),any(DataSource.GetEntity.class));
 
         presenter.getTVShow();
         verify(mockedView).showTVShowError();

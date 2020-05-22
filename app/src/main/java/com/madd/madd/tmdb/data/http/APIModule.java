@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class HTTPModule {
+public class APIModule {
 
     @Provides
     public OkHttpClient provideHttpClient(Context context){

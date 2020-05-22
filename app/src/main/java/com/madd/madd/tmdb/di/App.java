@@ -7,7 +7,7 @@ import com.madd.madd.tmdb.data.entities.ContentList.ContentListDataModule;
 import com.madd.madd.tmdb.data.entities.Movie.MovieDataModule;
 import com.madd.madd.tmdb.data.entities.TVShow.TVShowDataModule;
 import com.madd.madd.tmdb.ui.ContentSearch.ContentSearchModule;
-import com.madd.madd.tmdb.data.http.HTTPModule;
+import com.madd.madd.tmdb.data.http.APIModule;
 import com.madd.madd.tmdb.ui.MovieCatalog.MovieCatalogModule;
 import com.madd.madd.tmdb.ui.MovieDetail.MovieDetailModule;
 import com.madd.madd.tmdb.ui.TVShowCatalog.TVShowCatalogModule;
@@ -28,7 +28,7 @@ public class App extends Application {
                     .tVShowDetailModule(new TVShowDetailModule())
                     .contentSearchModule(new ContentSearchModule())
 
-                    .hTTPModule(new HTTPModule())
+                    .aPIModule(new APIModule())
                     .movieDataModule(new MovieDataModule())
                     .tVShowDataModule(new TVShowDataModule())
                     .castDataModule(new CastDataModule())
