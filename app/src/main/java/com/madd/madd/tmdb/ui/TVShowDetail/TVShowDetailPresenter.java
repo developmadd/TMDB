@@ -52,7 +52,7 @@ public class TVShowDetailPresenter implements TVShowDetailContract.Presenter {
     public void getCast() {
         if( view != null ){
 
-            castRepository.getTVShowCast(view.getTVShowId(), new CastDataSource.GetCast() {
+            castRepository.getTVShowCast(view.getTVShowId(), new DataSource.GetEntity<Cast>() {
                 @Override
                 public void onSuccess(Cast cast) {
                     if(!cast.getActorList().isEmpty() ) {

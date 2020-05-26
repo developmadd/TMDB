@@ -2,6 +2,7 @@ package com.madd.madd.tmdb.data.entities.Cast.Source.Remote;
 
 import com.madd.madd.tmdb.data.entities.Cast.CastDataSource;
 import com.madd.madd.tmdb.data.entities.Cast.Model.Cast;
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.http.TMDBApi;
 
 import retrofit2.Call;
@@ -17,7 +18,7 @@ public class CastRemoteDataSource implements CastDataSource.Remote {
     }
 
     @Override
-    public void getMovieCast(String movieId, CastDataSource.GetCast getCast) {
+    public void getMovieCast(String movieId, DataSource.GetEntity<Cast> getCast) {
         Call<Cast> castCall = api.getMovieCast(movieId,
                 TMDBApi.TMDB_API_KEY);
         castCall.enqueue(new Callback<Cast>() {
@@ -34,7 +35,7 @@ public class CastRemoteDataSource implements CastDataSource.Remote {
     }
 
     @Override
-    public void getTVShowCast(String tvShowId, CastDataSource.GetCast getCast) {
+    public void getTVShowCast(String tvShowId, DataSource.GetEntity<Cast> getCast) {
         Call<Cast> castCall = api.getTVShowCast(tvShowId,
                 TMDBApi.TMDB_API_KEY);
 

@@ -2,6 +2,7 @@ package com.madd.madd.tmdb.ui.ContentSearch;
 
 import com.madd.madd.tmdb.data.entities.ContentList.ContentListDataSource;
 import com.madd.madd.tmdb.data.entities.ContentList.Model.ContentList;
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.Movie.Model.MovieList;
 import com.madd.madd.tmdb.data.entities.TVShow.Model.TVShowList;
 
@@ -30,7 +31,8 @@ public class ContentSearchPresenter implements ContentSearchContract.Presenter {
             if(!query.isEmpty()) {
                 List<ContentList.Content> joinContentList = new ArrayList<>();
                 final int[] counter = {0}, moviePage = {0}, tvShowPage = {0};
-                repository.getMovieListByQuery(query, view.getMoviePage(), new ContentListDataSource.GetContentList() {
+                repository.getMovieListByQuery(query, view.getMoviePage(),
+                        new DataSource.GetEntity<ContentList>() {
                     @Override
                     public void onSuccess(ContentList contentList) {
 
@@ -52,7 +54,8 @@ public class ContentSearchPresenter implements ContentSearchContract.Presenter {
                     }
                 });
 
-                repository.getTVShowListByQuery(query, view.getTVShowPage(), new ContentListDataSource.GetContentList() {
+                repository.getTVShowListByQuery(query, view.getTVShowPage(),
+                        new DataSource.GetEntity<ContentList>() {
                     @Override
                     public void onSuccess(ContentList contentList) {
                         joinContentList.addAll(contentList.getContentList());

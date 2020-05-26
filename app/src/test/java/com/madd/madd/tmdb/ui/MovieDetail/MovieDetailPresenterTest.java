@@ -1,6 +1,9 @@
 package com.madd.madd.tmdb.ui.MovieDetail;
 
+import com.madd.madd.tmdb.data.entities.Cast.CastDataSource;
+import com.madd.madd.tmdb.data.entities.DataSource;
 import com.madd.madd.tmdb.data.entities.Movie.Model.Movie;
+import com.madd.madd.tmdb.data.entities.Movie.MovieDataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,16 +19,18 @@ public class MovieDetailPresenterTest {
 
     private MovieDetailPresenter presenter;
 
-    private MovieDetailContract.Model mockedModel;
+    private MovieDataSource.Repository mockedMovieRepository;
+    private CastDataSource.Repository mockedCastRepository;
     private MovieDetailContract.View mockedView;
 
     @Before
     public void setUp(){
 
-        mockedModel = mock(MovieDetailContract.Model.class);
+        mockedMovieRepository = mock(MovieDataSource.Repository.class);
+        mockedCastRepository = mock(CastDataSource.Repository.class);
         mockedView = mock(MovieDetailContract.View.class);
 
-        presenter = new MovieDetailPresenter(mockedModel);
+        presenter = new MovieDetailPresenter(mockedMovieRepository,mockedCastRepository);
         presenter.setView(mockedView);
 
     }
@@ -44,9 +49,9 @@ public class MovieDetailPresenterTest {
     public void showMovieWithoutInternet(){
         when(mockedView.getMovieId()).thenReturn("movieId");
         doAnswer(invocation -> {
-            ((MovieDetailContract.Model.GetMovie)invocation.getArguments()[1]).onError("sin internet");
+            ((DataSource.GetEntity)invocation.getArguments()[1]).onError("sin internet");
             return null;
-        }).when(mockedModel).getMovie(eq("movieId"),any(MovieDetailContract.Model.GetMovie.class));
+        }).when(mockedMovieRepository).getMovie(eq("movieId"),any(DataSource.GetEntity.class));
 
         presenter.getMovie();
         verify(mockedView).showMovieError();
@@ -56,9 +61,9 @@ public class MovieDetailPresenterTest {
     public void showMovieWitCastError(){
         when(mockedView.getMovieId()).thenReturn("movieId");
         doAnswer(invocation -> {
-            ((MovieDetailContract.Model.GetCast)invocation.getArguments()[1]).onError("sin internet");
+            ((DataSource.GetEntity)invocation.getArguments()[1]).onError("sin internet");
             return null;
-        }).when(mockedModel).getMovieCast(eq("movieId"),any(MovieDetailContract.Model.GetCast.class));
+        }).when(mockedCastRepository).getMovieCast(eq("movieId"),any(DataSource.GetEntity.class));
 
         presenter.getCast();
         verify(mockedView).showCastError();
@@ -70,9 +75,9 @@ public class MovieDetailPresenterTest {
         when(mockedView.getMovieId()).thenReturn("movieId");
 
         doAnswer(invocation -> {
-            ((MovieDetailContract.Model.GetMovie)invocation.getArguments()[1]).onSuccess(requestedMovie);
+            ((DataSource.GetEntity)invocation.getArguments()[1]).onSuccess(requestedMovie);
             return null;
-        }).when(mockedModel).getMovie(eq("movieId"),any(MovieDetailContract.Model.GetMovie.class));
+        }).when(mockedMovieRepository).getMovie(eq("movieId"),any(DataSource.GetEntity.class));
 
         presenter.getMovie();
         verify(mockedView).showMovie(requestedMovie);

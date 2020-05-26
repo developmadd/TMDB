@@ -49,7 +49,7 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
     public void getCast() {
         if( view != null ){
 
-            castRepository.getMovieCast(view.getMovieId(), new CastDataSource.GetCast() {
+            castRepository.getMovieCast(view.getMovieId(), new DataSource.GetEntity<Cast>() {
                 @Override
                 public void onSuccess(Cast cast) {
                     if(!cast.getActorList().isEmpty() ) {

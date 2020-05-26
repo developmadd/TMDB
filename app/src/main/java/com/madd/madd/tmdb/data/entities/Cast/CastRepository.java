@@ -1,6 +1,7 @@
 package com.madd.madd.tmdb.data.entities.Cast;
 
 import com.madd.madd.tmdb.data.entities.Cast.Model.Cast;
+import com.madd.madd.tmdb.data.entities.DataSource;
 
 public class CastRepository implements CastDataSource.Repository {
 
@@ -14,8 +15,8 @@ public class CastRepository implements CastDataSource.Repository {
     }
 
     @Override
-    public void getMovieCast(String movieId, CastDataSource.GetCast getCast) {
-        castCacheDataSource.getMovieCast(movieId, new CastDataSource.GetCast() {
+    public void getMovieCast(String movieId, DataSource.GetEntity<Cast> getCast) {
+        castCacheDataSource.getMovieCast(movieId, new DataSource.GetEntity<Cast>() {
             @Override
             public void onSuccess(Cast cast) {
                 getCast.onSuccess(cast);
@@ -23,7 +24,7 @@ public class CastRepository implements CastDataSource.Repository {
 
             @Override
             public void onError(String error) {
-                castRemoteDataSource.getMovieCast(movieId, new CastDataSource.GetCast() {
+                castRemoteDataSource.getMovieCast(movieId, new DataSource.GetEntity<Cast>() {
                     @Override
                     public void onSuccess(Cast cast) {
                         getCast.onSuccess(cast);
@@ -41,8 +42,8 @@ public class CastRepository implements CastDataSource.Repository {
     }
 
     @Override
-    public void getTVShowCast(String tvShowId, CastDataSource.GetCast getCast) {
-        castCacheDataSource.getTVShowCast(tvShowId, new CastDataSource.GetCast() {
+    public void getTVShowCast(String tvShowId, DataSource.GetEntity<Cast> getCast) {
+        castCacheDataSource.getTVShowCast(tvShowId, new DataSource.GetEntity<Cast>() {
             @Override
             public void onSuccess(Cast cast) {
                 getCast.onSuccess(cast);
@@ -50,7 +51,7 @@ public class CastRepository implements CastDataSource.Repository {
 
             @Override
             public void onError(String error) {
-                castRemoteDataSource.getTVShowCast(tvShowId, new CastDataSource.GetCast() {
+                castRemoteDataSource.getTVShowCast(tvShowId, new DataSource.GetEntity<Cast>() {
                     @Override
                     public void onSuccess(Cast cast) {
                         getCast.onSuccess(cast);

@@ -2,6 +2,7 @@ package com.madd.madd.tmdb.data.entities.Cast.Source.Local;
 
 import com.madd.madd.tmdb.data.entities.Cast.CastDataSource;
 import com.madd.madd.tmdb.data.entities.Cast.Model.Cast;
+import com.madd.madd.tmdb.data.entities.DataSource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +15,7 @@ public class CastCacheDataSource implements CastDataSource.Cache {
     private long CACHE_LIFETIME = 1000 * 60;
 
     @Override
-    public void getMovieCast(String movieId, CastDataSource.GetCast getCast) {
+    public void getMovieCast(String movieId, DataSource.GetEntity<Cast> getCast) {
         Cast cast = movieCastMap.get(movieId);
         if( cast != null ){
             if( System.currentTimeMillis() - cast.getTimeStap() < CACHE_LIFETIME  ){
@@ -28,7 +29,7 @@ public class CastCacheDataSource implements CastDataSource.Cache {
     }
 
     @Override
-    public void getTVShowCast(String tvShowId, CastDataSource.GetCast getCast) {
+    public void getTVShowCast(String tvShowId, DataSource.GetEntity<Cast> getCast) {
         Cast cast = tvShowCastMap.get(tvShowId);
         if( cast != null ){
             if( System.currentTimeMillis() - cast.getTimeStap() < CACHE_LIFETIME  ){

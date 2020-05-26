@@ -50,7 +50,7 @@ public class TVShowDetailPresenterTest {
 
 
     @Test
-    public void showMovieWithoutInternet(){
+    public void showTVSHowWithoutInternet(){
         when(mockedView.getTVShowId()).thenReturn("tvShowId");
         doAnswer(invocation -> {
             ((DataSource.GetEntity)invocation.getArguments()[1]).onError("sin internet");
@@ -65,23 +65,23 @@ public class TVShowDetailPresenterTest {
     public void showMovieWitCastError(){
         when(mockedView.getTVShowId()).thenReturn("tvShowId");
         doAnswer(invocation -> {
-            ((TVShowDetailContract.Model.GetCast)invocation.getArguments()[1]).onError("sin internet");
+            ((DataSource.GetEntity)invocation.getArguments()[1]).onError("sin internet");
             return null;
-        }).when(mockedModel).getTVShowCast(eq("tvShowId"),any(TVShowDetailContract.Model.GetCast.class));
+        }).when(mockedCastRepository).getTVShowCast(eq("tvShowId"),any(DataSource.GetEntity.class));
 
         presenter.getCast();
         verify(mockedView).showCastError();
     }
     @Test
-    public void showMovie(){
+    public void showTVShow(){
         TVShow requestedTVShow = new TVShow();
         requestedTVShow.setName("Smallville");
         when(mockedView.getTVShowId()).thenReturn("tvShowId");
 
         doAnswer(invocation -> {
-            ((TVShowDetailContract.Model.GetTVShow)invocation.getArguments()[1]).onSuccess(requestedTVShow);
+            ((DataSource.GetEntity<TVShow>)invocation.getArguments()[1]).onSuccess(requestedTVShow);
             return null;
-        }).when(mockedModel).getTVShow(eq("tvShowId"),any(TVShowDetailContract.Model.GetTVShow.class));
+        }).when(mockedTVRepository).getTVShow(eq("tvShowId"),any(DataSource.GetEntity.class));
 
         presenter.getTVShow();
         verify(mockedView).showTVShow(requestedTVShow);

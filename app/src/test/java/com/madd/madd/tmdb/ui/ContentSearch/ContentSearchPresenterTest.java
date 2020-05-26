@@ -1,7 +1,9 @@
 package com.madd.madd.tmdb.ui.ContentSearch;
 
 
+import com.madd.madd.tmdb.data.entities.ContentList.ContentListDataSource;
 import com.madd.madd.tmdb.data.entities.ContentList.Model.ContentList;
+import com.madd.madd.tmdb.data.entities.DataSource;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,16 +23,16 @@ public class ContentSearchPresenterTest {
 
     private ContentSearchPresenter presenter;
 
-    private ContentSearchContract.Model mockedModel;
+    private ContentListDataSource.Repository mockedContentListRepository;
     private ContentSearchContract.View mockedView;
 
     @Before
     public void setUp(){
 
-        mockedModel = mock(ContentSearchContract.Model.class);
+        mockedContentListRepository = mock(ContentListDataSource.Repository.class);
         mockedView = mock(ContentSearchContract.View.class);
 
-        presenter = new ContentSearchPresenter(mockedModel);
+        presenter = new ContentSearchPresenter(mockedContentListRepository);
         presenter.setView(mockedView);
 
     }
@@ -44,16 +46,22 @@ public class ContentSearchPresenterTest {
 
      */
 
+
+
+
+
+
+
     @Test
     public void requestListWithoutInternet(){
 
         String query = "pir";
         when(mockedView.getMoviePage()).thenReturn(1);
         doAnswer(invocation -> {
-            ((ContentSearchContract.Model.GetContentList)invocation.getArguments()[2]).onError("sin internet");
+            ((DataSource.GetEntity)invocation.getArguments()[2]).onError("sin internet");
             return null;
-        }).when(mockedModel).getMovieListByQuery(eq(query) ,eq(1),
-                any(ContentSearchContract.Model.GetContentList.class));
+        }).when(mockedContentListRepository).getMovieListByQuery(eq(query) ,eq(1),
+                any(DataSource.GetEntity.class));
 
         presenter.requestContentList(query);
         verify(mockedView).showInternetError();
@@ -71,16 +79,16 @@ public class ContentSearchPresenterTest {
         ContentList emptyContentList = new ContentList(1,contents);
 
         doAnswer(invocation -> {
-            ((ContentSearchContract.Model.GetContentList)invocation.getArguments()[2]).onSuccess(emptyContentList);
+            ((DataSource.GetEntity)invocation.getArguments()[2]).onSuccess(emptyContentList);
             return null;
-        }).when(mockedModel).getMovieListByQuery(eq(query) ,eq(1),
-                any(ContentSearchContract.Model.GetContentList.class));
+        }).when(mockedContentListRepository).getMovieListByQuery(eq(query) ,eq(1),
+                any(DataSource.GetEntity.class));
 
         doAnswer(invocation -> {
-            ((ContentSearchContract.Model.GetContentList)invocation.getArguments()[2]).onSuccess(emptyContentList);
+            ((DataSource.GetEntity)invocation.getArguments()[2]).onSuccess(emptyContentList);
             return null;
-        }).when(mockedModel).getTVShowListByQuery(eq(query) ,eq(1),
-                any(ContentSearchContract.Model.GetContentList.class));
+        }).when(mockedContentListRepository).getTVShowListByQuery(eq(query) ,eq(1),
+                any(DataSource.GetEntity.class));
 
         presenter.requestContentList(query);
         verify(mockedView).showEmptyListError();
@@ -115,16 +123,16 @@ public class ContentSearchPresenterTest {
 
         doAnswer(invocation -> {
 
-            ((ContentSearchContract.Model.GetContentList)invocation.getArguments()[2]).onSuccess(mContentList);
+            ((DataSource.GetEntity)invocation.getArguments()[2]).onSuccess(mContentList);
             return null;
-        }).when(mockedModel).getMovieListByQuery(eq(query) ,eq(1),
-                any(ContentSearchContract.Model.GetContentList.class));
+        }).when(mockedContentListRepository).getMovieListByQuery(eq(query) ,eq(1),
+                any(DataSource.GetEntity.class));
 
         doAnswer(invocation -> {
-            ((ContentSearchContract.Model.GetContentList)invocation.getArguments()[2]).onSuccess(tvContentList);
+            ((DataSource.GetEntity)invocation.getArguments()[2]).onSuccess(tvContentList);
             return null;
-        }).when(mockedModel).getTVShowListByQuery(eq(query) ,eq(1),
-                any(ContentSearchContract.Model.GetContentList.class));
+        }).when(mockedContentListRepository).getTVShowListByQuery(eq(query) ,eq(1),
+                any(DataSource.GetEntity.class));
 
         presenter.requestContentList(query);
         verify(mockedView).showContentList(refEq(mixedList),eq(2),eq(2));
